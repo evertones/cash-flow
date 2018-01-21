@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CashFlow - Pet Project</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+
+    <div class="container">
+        <a th:href="${'/item/add'}" class="btn btn-primary">New Item</a>
+    </div>
+
+    <div class="container">
+        <div th:if="${not #lists.isEmpty(items)}">
+            <h2>All Items</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}">Id</td>
+                    <td th:text="${item.name}">Name</td>
+                    <td th:text="${item.value}">Value</td>
+                    <td th:text="${item.active}">Status</td>
+                    <td><a th:href="${'/item/edit/' + item.id}" class="btn btn-default">Edit</a></td>
+                    <td><a th:href="${'/item/active/toggle/' + item.id}" class="btn btn-info">Change Status</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
