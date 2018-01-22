@@ -17,4 +17,9 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String getLogin() {
+        return "login";
+    }
+
 }
