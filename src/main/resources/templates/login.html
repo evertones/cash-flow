@@ -1,54 +1,46 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Spring Security Example </title>
-    <div th:replace="layout/header :: header-css"></div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+    <link rel="stylesheet" th:href="@{/css/login/style.css}" href="/css/login/style.css" />
 </head>
 <body>
 
-    <!-- div th:replace="layout/header :: header"></div -->
-
     <div class="container">
-        <div class="row" style="margin-top:20px">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form th:action="@{/login}" method="post">
-                    <fieldset>
-                        <h1>Please Sign In</h1>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <div class="account-wall">
+                    <div id="my-tab-content" class="tab-content">
+                        <div class="tab-pane active" id="login">
 
-                        <div th:if="${param.error}">
-                            <div class="alert alert-danger">
-                                Invalid username and password.
-                            </div>
-                        </div>
-                        <div th:if="${param.logout}">
-                            <div class="alert alert-info">
-                                You have been logged out.
-                            </div>
-                        </div>
+                            <img class="profile-img" src="/images/login/company_logo.jpg?sz=120" alt=""></img>
+                            <form class="form-signin" th:action="@{/login}" method="post">
+                                <div th:if="${param.error}">
+                                    <div class="alert alert-danger">
+                                        Invalid username and password.
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <input type="text" name="username" id="username" class="form-control input-lg"
-                                   placeholder="UserName" required="true" autofocus="true"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg"
-                                   placeholder="Password" required="true"/>
-                        </div>
+                                <div th:if="${param.logout}">
+                                    <div class="alert alert-info">
+                                        You have been logged out.
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"/>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                            </div>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required="true" autofocus="true" />
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="true" />
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In" />
+                            </form>
+
                         </div>
-                    </fieldset>
-                </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- div th:replace="layout/footer :: footer"></div -->
 
 </body>
 </html>

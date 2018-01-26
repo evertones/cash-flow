@@ -8,7 +8,7 @@ public class Flow {
     private Integer     id;
     private String      inputOutput;
     private String      expectedExecuted;
-    private Item item;
+    private Item        item;
     private String      itemName;
     private Double      value;
     private Period      period;
