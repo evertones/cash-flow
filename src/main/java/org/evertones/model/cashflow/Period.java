@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 public class Period {
 
     private Integer id;
-    private Short   month;
-    private Short   year;
+    private Integer month;
+    private Integer year;
     private Double  balancePeriod;
     private Double  balanceFinal;
 
@@ -26,20 +26,20 @@ public class Period {
     }
 
     @NotNull
-    public Short getMonth() {
+    public Integer getMonth() {
         return month;
     }
 
-    public void setMonth(Short month) {
+    public void setMonth(Integer month) {
         this.month = month;
     }
 
     @NotNull
-    public Short getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(Short year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
