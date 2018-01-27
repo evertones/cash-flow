@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RandomDate {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     public Integer randomMonth() {
         return random.nextInt(12) + 1;

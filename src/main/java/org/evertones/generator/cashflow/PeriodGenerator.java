@@ -15,7 +15,7 @@ public class PeriodGenerator implements BaseGenerator<Period> {
     public Period generate() {
         Period period = new Period();
 
-        //period.setId(RandomString.random.nextInt());
+        //period.setId(RandomText.random.nextInt());
         period.setMonth(randomDate.randomMonth());
         period.setYear(randomDate.randomYear());
         period.setBalancePeriod(random.nextDouble());

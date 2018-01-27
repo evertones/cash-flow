@@ -2,18 +2,18 @@ package org.evertones.generator.cashflow;
 
 import org.evertones.generator.BaseGenerator;
 import org.evertones.model.cashflow.Client;
-import org.evertones.util.RandomString;
+import org.evertones.util.RandomText;
 
 public class ClientGenerator implements BaseGenerator<Client> {
 
-    RandomString randomString = new RandomString();
+    RandomText randomText = new RandomText();
 
     @Override
     public Client generate() {
         Client client = new Client();
 
-        //client.setId(RandomString.random.nextInt());
-        client.setName(randomString.randomText("Client"));
+        //client.setId(RandomText.random.nextInt());
+        client.setName(randomText.randomText("Client"));
 
         return client;
     }

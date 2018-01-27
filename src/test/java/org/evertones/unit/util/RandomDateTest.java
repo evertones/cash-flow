@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class RandomDateTest {
 
-    Random     random     = new Random();
-    RandomDate randomDate = new RandomDate();
+    private Random     random     = new Random();
+    private RandomDate randomDate = new RandomDate();
 
     @Test
     public void simpleRandomDayOfMonth() {
@@ -47,12 +47,12 @@ public class RandomDateTest {
 
     @Test
     public void isLeapYear() {
-        Assert.assertTrue("1980 is a leap year",     randomDate.isLeapYear(1980) == true);
-        Assert.assertTrue("1981 is not a leap year", randomDate.isLeapYear(1981) == false);
-        Assert.assertTrue("1982 is not a leap year", randomDate.isLeapYear(1982) == false);
-        Assert.assertTrue("1983 is not a leap year", randomDate.isLeapYear(1983) == false);
-        Assert.assertTrue("1984 is a leap year",     randomDate.isLeapYear(1984) == true);
-        Assert.assertTrue("1984 is not a leap year", randomDate.isLeapYear(1985) == false);
+        Assert.assertTrue("1980 is a leap year",     randomDate.isLeapYear(1980));
+        Assert.assertTrue("1981 is not a leap year", !randomDate.isLeapYear(1981));
+        Assert.assertTrue("1982 is not a leap year", !randomDate.isLeapYear(1982));
+        Assert.assertTrue("1983 is not a leap year", !randomDate.isLeapYear(1983));
+        Assert.assertTrue("1984 is a leap year",     randomDate.isLeapYear(1984));
+        Assert.assertTrue("1984 is not a leap year", !randomDate.isLeapYear(1985));
     }
 
 }

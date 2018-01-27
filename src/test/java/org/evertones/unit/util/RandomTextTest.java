@@ -1,20 +1,20 @@
 package org.evertones.unit.util;
 
 
-import org.evertones.util.RandomString;
+import org.evertones.util.RandomText;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.stream.IntStream;
 
-public class RandomStringTest {
+public class RandomTextTest {
 
-    RandomString randomString = new RandomString();
+    private RandomText randomString = new RandomText();
 
     @Test
     public void randomTextWithParamName() {
         IntStream.range(1, 100).forEach(i -> {
-            String name = randomString.randomText(10);
+            String name = randomString.randomText();
             String text = randomString.randomText(name);
             Assert.assertTrue("The text contains the desired string.", text.contains(name));
         });

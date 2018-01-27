@@ -1,7 +1,7 @@
 package org.evertones.model.client;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Client {
@@ -10,8 +10,8 @@ public class Client {
     private ClientDetails client;
     private ClientDetails father;
     private ClientDetails mother;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDate     createdAt;
+    private LocalDate     updatedAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,51 +19,57 @@ public class Client {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Client setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public ClientDetails getClient() {
         return client;
     }
 
-    public void setClient(ClientDetails client) {
+    public Client setClient(ClientDetails client) {
         this.client = client;
+        return this;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public ClientDetails getFather() {
         return father;
     }
 
-    public void setFather(ClientDetails father) {
+    public Client setFather(ClientDetails father) {
         this.father = father;
+        return this;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public ClientDetails getMother() {
         return mother;
     }
 
-    public void setMother(ClientDetails mother) {
+    public Client setMother(ClientDetails mother) {
         this.mother = mother;
+        return this;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public Client setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public Client setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 
 }
