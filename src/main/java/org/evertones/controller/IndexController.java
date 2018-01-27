@@ -22,4 +22,9 @@ public class IndexController {
         return "login";
     }
 
+    @RequestMapping(path = "/construction", method = RequestMethod.GET)
+    public String getConstruction() {
+        return "underConstruction";
+    }
+
 }
