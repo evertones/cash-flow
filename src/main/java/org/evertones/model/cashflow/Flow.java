@@ -12,7 +12,7 @@ public class Flow {
     private String      itemName;
     private Double      value;
     private Period      period;
-    private Client client;
+    private ClientOld clientOld;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,11 +75,11 @@ public class Flow {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    public Client getClient() {
-        return client;
+    public ClientOld getClientOld() {
+        return clientOld;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientOld(ClientOld clientOld) {
+        this.clientOld = clientOld;
     }
 }

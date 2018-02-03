@@ -1,20 +1,20 @@
 package org.evertones.generator.cashflow;
 
 import org.evertones.generator.BaseGenerator;
-import org.evertones.model.cashflow.Client;
+import org.evertones.model.cashflow.ClientOld;
 import org.evertones.util.RandomText;
 
-public class ClientGenerator implements BaseGenerator<Client> {
+public class ClientGenerator implements BaseGenerator<ClientOld> {
 
     RandomText randomText = new RandomText();
 
     @Override
-    public Client generate() {
-        Client client = new Client();
+    public ClientOld generate() {
+        ClientOld clientOld = new ClientOld();
 
-        //client.setId(RandomText.random.nextInt());
-        client.setName(randomText.randomText("Client"));
+        //clientOld.setId(RandomText.random.nextInt());
+        clientOld.setName(randomText.randomText("ClientOld"));
 
-        return client;
+        return clientOld;
     }
 }
