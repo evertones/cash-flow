@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CashFlow - Pet Project</title>
+    <div th:replace="layout/header :: header-css"></div>
+</head>
+<body>
+
+    <div th:replace="layout/header :: header"></div>
+
+    <div class="container">
+
+        <div class="col-md-12 text-center">
+            <h4>D A S H B O A R D</h4>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">This Month</div>
+                <div class="panel-body">
+                    <div th:each="client: ${currentMonth}">
+                        <p th:text="${client.client.name}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Next Month</div>
+                <div class="panel-body">
+                    <div th:each="client: ${nextMonth}">
+                        <p th:text="${client.client.name}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading">Previous Month</div>
+                <div class="panel-body">
+                    <div th:each="client: ${previousMonth}">
+                        <p th:text="${client.client.name}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript"
+            src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

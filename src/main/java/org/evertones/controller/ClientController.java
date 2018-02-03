@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class ClientController {
 
@@ -42,6 +44,25 @@ public class ClientController {
     public String submit(Client client) {
         clientService.save(client);
         return "redirect:/client/edit/"+client.getId();
+    }
+
+    @RequestMapping(path = "/client/dashboard", method = RequestMethod.GET)
+    public String dashboard(Model model) {
+
+        // TODO: Fix the bug when filtering data by the MONTH
+//        List<Client> currentMonth  = clientService.findByMonthOfBirth(LocalDate.now().getMonth());
+//        List<Client> previousMonth = clientService.findByMonthOfBirth(LocalDate.now().getMonth().minus(1L));
+//        List<Client> nextMonth     = clientService.findByMonthOfBirth(LocalDate.now().getMonth().plus(1L));
+
+        List<Client> currentMonth  = clientRepository.findAll();
+        List<Client> previousMonth = clientRepository.findAll();
+        List<Client> nextMonth     = clientRepository.findAll();
+
+        model.addAttribute("currentMonth",  currentMonth);
+        model.addAttribute("nextMonth",     previousMonth);
+        model.addAttribute("previousMonth", nextMonth);
+
+        return "/client/dashboard";
     }
 
 }
