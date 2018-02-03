@@ -1,8 +1,12 @@
 package org.evertones.persistence.client;
 
 import org.evertones.model.client.Client;
+import org.evertones.model.client.QClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.Month;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -25,4 +29,9 @@ public class ClientService {
 
         return clientRepository.save(client);
     }
+
+    public List<Client> findByMonthOfBirth(Month month) {
+        return (List<Client>) clientRepository.findAll(ClientSpecification.queryClientBirthday(month));
+    }
+
 }
