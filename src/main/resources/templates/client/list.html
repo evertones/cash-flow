@@ -5,7 +5,6 @@
     <title>CashFlow - Pet Project</title>
 
     <div th:replace="layout/header :: header-css"></div>
-
     <link id="bsdp-css" th:href="@{/webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css}" rel="stylesheet" />
     <script th:src="@{/webjars/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js}"></script>
 
@@ -75,7 +74,7 @@
                     <th>Mother Name</th>
                     <th>Father Name</th>
                 </tr>
-                <tr th:each="client : ${clients}">
+                <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
                     <td th:text="${client.client.name}">Name</td>
                     <td th:text="${{client.client.birthday}}">Birthday</td>
                     <td th:text="${client.mother.name}">Name</td>

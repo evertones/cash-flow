@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>CashFlow - Pet Project</title>
+
     <div th:replace="layout/header :: header-css"></div>
+    <link id="bsdp-css" th:href="@{/webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js}"></script>
 </head>
 <body>
 
@@ -30,7 +33,19 @@
                     <div class="form-group col-md-6">
                         <div class="col-md-12">
                             <label class="control-label">Birthday:</label>
-                            <input type="date" class="form-control" th:field="*{client.birthday}" />
+                            <div id="datepicker1" class="input-group date">
+                                <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datepicker1').datepicker({
+                                        todayHighlight: true,
+                                        format: 'dd/mm/yyyy',
+                                        clearBtn: true
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
 
@@ -61,7 +76,19 @@
                     <div class="form-group col-md-6">
                         <div class="col-md-12">
                             <label class="control-label">Birthday:</label>
-                            <input type="text" class="form-control" th:field="*{mother.birthday}" />
+                            <div id="datepicker2" class="input-group date">
+                                <input type="text" class="form-control"  th:field="*{{mother.birthday}}"/>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datepicker2').datepicker({
+                                        todayHighlight: true,
+                                        format: 'dd/mm/yyyy',
+                                        clearBtn: true
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
 
@@ -92,7 +119,19 @@
                     <div class="form-group col-md-6">
                         <div class="col-md-12">
                             <label class="control-label">Birthday:</label>
-                            <input type="text" class="form-control" th:field="*{father.birthday}" />
+                            <div id="datepicker3" class="input-group date">
+                                <input type="text" class="form-control"  th:field="*{{father.birthday}}"/>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            </div>
+                            <script type="text/javascript">
+                                $(function () {
+                                    $('#datepicker3').datepicker({
+                                        todayHighlight: true,
+                                        format: 'dd/mm/yyyy',
+                                        clearBtn: true
+                                    });
+                                });
+                            </script>
                         </div>
                     </div>
 
