@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CashFlow - Pet Project</title>
+
+    <div th:replace="layout/header :: header-css"></div>
+
+    <link id="bsdp-css" th:href="@{/webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css}" rel="stylesheet" />
+    <script th:src="@{/webjars/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js}"></script>
+
+</head>
+<body>
+
+    <div th:replace="layout/header :: header"></div>
+
+    <div class="container">
+        <legend>Search Client</legend>
+        <form class="form-horizontal" th:object="${client}" th:action="@{/client/list}" method="post">
+            <div class="form-group">
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label">Name:</label>
+                        <input type="text" class="form-control" th:field="*{client.name}" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label">Birthday:</label>
+                        <div id="datepicker1" class="input-group date">
+                            <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datepicker1').datepicker({
+                                    todayHighlight: true,
+                                    format: 'dd/mm/yyyy',
+                                    clearBtn: true
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label">Mother Name:</label>
+                        <input type="text" class="form-control" th:field="*{mother.name}" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label">Father Name:</label>
+                        <input type="text" class="form-control" th:field="*{father.name}" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <div th:fragment="resultList" id="results-block">
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Mother Name</th>
+                    <th>Father Name</th>
+                </tr>
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.client.name}">Name</td>
+                    <td th:text="${{client.client.birthday}}">Birthday</td>
+                    <td th:text="${client.mother.name}">Name</td>
+                    <td th:text="${client.father.name}">Name</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+            src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

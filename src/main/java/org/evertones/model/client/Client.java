@@ -24,7 +24,7 @@ public class Client {
         return this;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     public ClientDetails getClient() {
         return client;
     }
@@ -34,7 +34,7 @@ public class Client {
         return this;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     public ClientDetails getFather() {
         return father;
     }
@@ -44,7 +44,7 @@ public class Client {
         return this;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     public ClientDetails getMother() {
         return mother;
     }

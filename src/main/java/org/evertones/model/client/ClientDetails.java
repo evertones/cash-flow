@@ -1,5 +1,7 @@
 package org.evertones.model.client;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +37,7 @@ public class ClientDetails {
         return this;
     }
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     public LocalDate getBirthday() {
         return birthday;
     }
