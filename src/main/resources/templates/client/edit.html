@@ -10,121 +10,115 @@
     <div th:replace="layout/header :: header"></div>
 
     <div class="container">
-
-        <div class="col-md-12 text-center">
-            <h4>C L I E N T</h4>
-        </div>
-
-        <div>
-            <form class="form-horizontal" th:object="${client}" th:action="@{/client/add}" method="post">
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-10">
-                        <input type="hidden" class="form-control" th:field="*{id}"/>
-                    </div>
+        <legend>Add Client</legend>
+        <form class="form-horizontal" th:object="${client}" th:action="@{/client/add}" method="post">
+            <div class="form-group">
+                <div class="col-md-6 col-sm-10">
+                    <input type="hidden" class="form-control" th:field="*{id}"/>
                 </div>
+            </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Model Details</div>
-                    <div class="panel-body">
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Name:</label>
-                                <input type="text" class="form-control" th:field="*{client.name}" />
-                            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Model Details</div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Name:</label>
+                            <input type="text" class="form-control" th:field="*{client.name}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Birthday:</label>
-                                <input type="text" class="form-control" th:field="*{client.birthday}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Birthday:</label>
+                            <input type="date" class="form-control" th:field="*{client.birthday}" />
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">E-mail:</label>
-                                <input type="email" class="form-control" th:field="*{client.email}" />
-                            </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">E-mail:</label>
+                            <input type="email" class="form-control" th:field="*{client.email}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Phone:</label>
-                                <input type="text" class="form-control" th:field="*{client.phone}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Phone:</label>
+                            <input type="text" class="form-control" th:field="*{client.phone}" />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Mother Details</div>
-                    <div class="panel-body">
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Name:</label>
-                                <input type="text" class="form-control" th:field="*{mother.name}" />
-                            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Mother Details</div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Name:</label>
+                            <input type="text" class="form-control" th:field="*{mother.name}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Birthday:</label>
-                                <input type="text" class="form-control" th:field="*{mother.birthday}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Birthday:</label>
+                            <input type="text" class="form-control" th:field="*{mother.birthday}" />
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">E-mail:</label>
-                                <input type="email" class="form-control" th:field="*{mother.email}" />
-                            </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">E-mail:</label>
+                            <input type="email" class="form-control" th:field="*{mother.email}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Phone:</label>
-                                <input type="text" class="form-control" th:field="*{mother.phone}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Phone:</label>
+                            <input type="text" class="form-control" th:field="*{mother.phone}" />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Father Details</div>
-                    <div class="panel-body">
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Name:</label>
-                                <input type="text" class="form-control" th:field="*{father.name}" />
-                            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Father Details</div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Name:</label>
+                            <input type="text" class="form-control" th:field="*{father.name}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Birthday:</label>
-                                <input type="text" class="form-control" th:field="*{father.birthday}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Birthday:</label>
+                            <input type="text" class="form-control" th:field="*{father.birthday}" />
                         </div>
+                    </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">E-mail:</label>
-                                <input type="email" class="form-control" th:field="*{father.email}" />
-                            </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">E-mail:</label>
+                            <input type="email" class="form-control" th:field="*{father.email}" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <div class="col-md-12">
-                                <label class="control-label">Phone:</label>
-                                <input type="text" class="form-control" th:field="*{father.phone}" />
-                            </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12">
+                            <label class="control-label">Phone:</label>
+                            <input type="text" class="form-control" th:field="*{father.phone}" />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a th:href="${'/'}" class="btn btn-default">Cancel</a>
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a th:href="${'/'}" class="btn btn-default">Cancel</a>
                 </div>
+            </div>
 
-            </form>
-        </div>
+        </form>
     </div>
 
     <script type="text/javascript"
