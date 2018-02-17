@@ -4,6 +4,7 @@ import org.evertones.model.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
@@ -18,6 +19,12 @@ public class ClientService {
     }
 
     public Client save(Client client) {
+
+        if (client.getId() == null) {
+            client.setCreatedAt(LocalDate.now());
+        }
+        client.setUpdatedAt(LocalDate.now());
+
         if (client.getMother().getName().isEmpty()) {
             client.setMother(null);
         }
