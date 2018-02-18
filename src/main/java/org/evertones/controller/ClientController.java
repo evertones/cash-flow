@@ -1,5 +1,6 @@
 package org.evertones.controller;
 
+import org.evertones.controller.dto.ClientDashboardDto;
 import org.evertones.model.client.Client;
 import org.evertones.persistence.client.ClientRepository;
 import org.evertones.persistence.client.ClientService;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
@@ -56,15 +59,34 @@ public class ClientController {
 
     @RequestMapping(path = "/client/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model) {
-        List<Client> currentMonth  = clientService.findByMonthOfBirth(LocalDate.now().getMonth());
-        List<Client> previousMonth = clientService.findByMonthOfBirth(LocalDate.now().getMonth().minus(1L));
-        List<Client> nextMonth     = clientService.findByMonthOfBirth(LocalDate.now().getMonth().plus(1L));
+        LocalDate now = LocalDate.now();
+
+        List<ClientDashboardDto> currentMonth  = buildOutput(clientService.findByMonthOfBirth(now.getMonth()));
+        List<ClientDashboardDto> previousMonth = buildOutput(clientService.findByMonthOfBirth(now.getMonth().minus(1L)));
+        List<ClientDashboardDto> nextMonth     = buildOutput(clientService.findByMonthOfBirth(now.getMonth().plus(1L)));
 
         model.addAttribute("currentMonth",  currentMonth);
-        model.addAttribute("nextMonth",     previousMonth);
-        model.addAttribute("previousMonth", nextMonth);
+        model.addAttribute("nextMonth",     nextMonth);
+        model.addAttribute("previousMonth", previousMonth);
 
         return "/client/dashboard";
+    }
+
+    private List<ClientDashboardDto> buildOutput(List<Client> clients) {
+        Comparator<ClientDashboardDto> byMonth = (ClientDashboardDto c1, ClientDashboardDto c2) ->
+                c1.getMonth().compareTo(c2.getMonth());
+
+        List<ClientDashboardDto> clientsDashboardDto = new ArrayList<ClientDashboardDto>();
+        clients.forEach(client -> {
+            clientsDashboardDto.add(new ClientDashboardDto(
+                    client.getClient().getName(),
+                    client.getClient().getBirthday(),
+                    null
+                    )
+            );
+        });
+
+        return clientsDashboardDto.stream().sorted(byMonth).collect(Collectors.toList());
     }
 
     @RequestMapping(path = "/client/list", method = RequestMethod.GET)

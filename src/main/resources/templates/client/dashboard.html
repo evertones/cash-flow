@@ -18,7 +18,7 @@
                 <div class="panel-heading">This Month</div>
                 <div class="panel-body">
                     <div th:each="client: ${currentMonth}">
-                        <p th:text="${client.client.name}"></p>
+                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="panel-heading">Next Month</div>
                 <div class="panel-body">
                     <div th:each="client: ${nextMonth}">
-                        <p th:text="${client.client.name}"></p>
+                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
                     </div>
                 </div>
             </div>
@@ -40,16 +40,14 @@
                 <div class="panel-heading">Previous Month</div>
                 <div class="panel-body">
                     <div th:each="client: ${previousMonth}">
-                        <p th:text="${client.client.name}"></p>
+                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <script type="text/javascript"
-            src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div th:replace="layout/footer :: footer-scripts"></div>
 
 </body>
 </html>

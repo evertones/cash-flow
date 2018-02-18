@@ -11,8 +11,6 @@
                     | Logged user: <span sec:authentication="name"></span> |
                     Roles: <span sec:authentication="principal.authorities"></span> |
                     <a th:href="@{/logout}">Sign Out</a>
-
-
                 </span>
 
             <script type="text/javascript"
@@ -20,6 +18,13 @@
                     src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </footer>
     </div>
+</div>
+
+<div th:fragment="footer-scripts">
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"
+            src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script th:src="@{/js/script.js}" src="/js/script.js"></script>
 </div>
 
 </body>
