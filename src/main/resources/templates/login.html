@@ -20,19 +20,19 @@
                             <form class="form-signin" th:action="@{/login}" method="post">
                                 <div th:if="${param.error}">
                                     <div class="alert alert-danger">
-                                        Invalid username and password.
+                                        <span th:text="#{module.auth.invalidCredentials}"></span>
                                     </div>
                                 </div>
 
                                 <div th:if="${param.logout}">
                                     <div class="alert alert-info">
-                                        You have been logged out.
+                                        <span th:text="#{module.auth.signedOut}"></span>
                                     </div>
                                 </div>
 
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Username" required="true" autofocus="true" />
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="true" />
-                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In" />
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" th:value="#{module.general.signIn}" />
                             </form>
 
                         </div>

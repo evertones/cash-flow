@@ -37,8 +37,8 @@ public class CashFlowApplication implements CommandLineRunner {
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
 //        slr.setDefaultLocale(new Locale("pt", "BR"));
-//        slr.setDefaultLocale(new Locale("pt"));
-        slr.setDefaultLocale(Locale.US);
+        slr.setDefaultLocale(new Locale("pt"));
+//        slr.setDefaultLocale(Locale.US);
         return slr;
     }
 

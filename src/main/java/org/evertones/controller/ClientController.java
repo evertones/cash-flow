@@ -89,22 +89,22 @@ public class ClientController {
         return clientsDashboardDto.stream().sorted(byMonth).collect(Collectors.toList());
     }
 
-    @RequestMapping(path = "/client/list", method = RequestMethod.GET)
+    @RequestMapping(path = "/client/search", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("client", new Client());
         model.addAttribute("clients", new ArrayList<Client>());
 
-        return "/client/list";
+        return "/client/search";
     }
 
-    @RequestMapping(path = "/client/list", method = RequestMethod.POST)
+    @RequestMapping(path = "/client/search", method = RequestMethod.POST)
     public String listResults(Client client, BindingResult bindingResult, Model model) {
         List<Client> list = clientService.findAll(client);
 
         model.addAttribute("client", client);
         model.addAttribute("clients", list);
 
-        return "/client/list";
+        return "/client/search";
     }
 
 }
