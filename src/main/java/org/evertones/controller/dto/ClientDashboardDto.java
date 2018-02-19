@@ -13,14 +13,14 @@ public class ClientDashboardDto {
         super();
         this.name = name;
         this.birthday = birthday;
-        this.month = birthday.getMonthValue();
+        this.dayOfMonth = birthday.getDayOfMonth();
         this.type = type;
     }
 
-    private String name;
+    private String    name;
     private LocalDate birthday;
-    private Integer month;
-    private String type; //client, mother, father
+    private Integer   dayOfMonth;
+    private String    type; //client, mother, father
 
     public String getName() {
         return name;
@@ -38,12 +38,12 @@ public class ClientDashboardDto {
         this.birthday = birthday;
     }
 
-    public Integer getMonth() {
-        return month;
+    public Integer getDayOfMonth() {
+        return dayOfMonth;
     }
 
-    public void setMonth(Integer month) {
-        this.month = month;
+    public void setDayOfMonth(Integer dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
     }
 
     public String getType() {

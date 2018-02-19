@@ -73,8 +73,8 @@ public class ClientController {
     }
 
     private List<ClientDashboardDto> buildOutput(List<Client> clients) {
-        Comparator<ClientDashboardDto> byMonth = (ClientDashboardDto c1, ClientDashboardDto c2) ->
-                c1.getMonth().compareTo(c2.getMonth());
+        Comparator<ClientDashboardDto> byDayOfMonth = (ClientDashboardDto c1, ClientDashboardDto c2) ->
+                c1.getDayOfMonth().compareTo(c2.getDayOfMonth());
 
         List<ClientDashboardDto> clientsDashboardDto = new ArrayList<ClientDashboardDto>();
         clients.forEach(client -> {
@@ -86,7 +86,7 @@ public class ClientController {
             );
         });
 
-        return clientsDashboardDto.stream().sorted(byMonth).collect(Collectors.toList());
+        return clientsDashboardDto.stream().sorted(byDayOfMonth).collect(Collectors.toList());
     }
 
     @RequestMapping(path = "/client/search", method = RequestMethod.GET)

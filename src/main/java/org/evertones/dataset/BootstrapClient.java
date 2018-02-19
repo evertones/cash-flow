@@ -20,7 +20,7 @@ public class BootstrapClient {
     public void create() {
         ClientGenerator clientGenerator = new ClientGenerator();
 
-        IntStream.range(1, 10).forEach(item -> {
+        IntStream.range(1, 100).forEach(item -> {
             clientRepository.save(clientGenerator.generate());
         });
     }

@@ -22,7 +22,7 @@
                 </div>
                 <div class="panel-body">
                     <div th:each="client: ${currentMonth}">
-                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
+                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="panel-body">
                     <div th:each="client: ${nextMonth}">
-                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
+                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="panel-body">
                     <div th:each="client: ${previousMonth}">
-                        <i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span>
+                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
                     </div>
                 </div>
             </div>

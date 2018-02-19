@@ -25,7 +25,7 @@
                 </tr>
                 <tr th:each="period : ${periods}">
                     <td th:text="${period.id}">Id</td>
-                    <td th:text="${period.month}">Month</td>
+                    <td th:text="${period.dayOfMonth}">Month</td>
                     <td th:text="${period.year}">Year</td>
                     <td><a th:href="${'/period/edit/' + period.id}" class="btn btn-default">Edit</a></td>
                 </tr>
