@@ -5,6 +5,7 @@ import org.evertones.model.client.Client;
 import org.evertones.persistence.client.ClientRepository;
 import org.evertones.persistence.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,13 +18,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
 
-    ClientRepository clientRepository;
-    ClientService    clientService;
+    private ClientRepository clientRepository;
+    private ClientService    clientService;
+    private MessageSource    messageSource;
 
     @Autowired
     public void setClientRepository(ClientRepository clientRepository) {
@@ -33,6 +36,11 @@ public class ClientController {
     @Autowired
     public void setClientService(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @Autowired
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 
     @RequestMapping(path = "/client/add", method = RequestMethod.GET)
@@ -51,7 +59,9 @@ public class ClientController {
     public String submit(Client client, RedirectAttributes attributes) {
         clientService.save(client);
 
-        attributes.addFlashAttribute("flashMessage", "Success");
+        // TODO: 1) Get the default locale; 2) add values for CSS classes in an Enum
+        Locale defaultLocale = new Locale("pt");
+        attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, defaultLocale));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
         return String.format("redirect:/client/add/%s", client.getId().toString());

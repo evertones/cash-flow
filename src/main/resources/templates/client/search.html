@@ -14,18 +14,22 @@
     <div th:replace="layout/header :: header"></div>
 
     <div class="container">
-        <legend>Search Client</legend>
+
+        <legend>
+            <span th:text="#{module.client.title}"></span> - <span th:text="#{module.general.search.title}"></span>
+        </legend>
+
         <form class="form-horizontal" th:object="${client}" th:action="@{/client/search}" method="post">
             <div class="form-group">
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label">Name:</label>
+                        <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
                         <input type="text" class="form-control" th:field="*{client.name}" />
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label">Birthday:</label>
+                        <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
                         <div id="datepicker1" class="input-group date">
                             <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
@@ -46,22 +50,25 @@
             <div class="form-group">
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label">Mother Name:</label>
+                        <label class="control-label"><span th:text="#{module.client.motherName.label}"></span></label>
                         <input type="text" class="form-control" th:field="*{mother.name}" />
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label">Father Name:</label>
+                        <label class="control-label"><span th:text="#{module.client.fatherName.label}"></span></label>
                         <input type="text" class="form-control" th:field="*{father.name}" />
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary"><span th:text="#{module.general.search.button}"></span></button>
+                    <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
                 </div>
             </div>
+
         </form>
     </div>
 
@@ -69,16 +76,22 @@
         <div th:fragment="resultList" id="results-block">
             <table class="table table-striped">
                 <tr>
-                    <th>Name</th>
-                    <th>Birthday</th>
-                    <th>Mother Name</th>
-                    <th>Father Name</th>
+                    <th><span th:text="#{module.general.name.label}"></span></th>
+                    <th><span th:text="#{module.client.birthday.label}"></span></th>
+                    <th><span th:text="#{module.client.motherName.label}"></span></th>
+                    <th><span th:text="#{module.client.fatherName.label}"></span></th>
                 </tr>
                 <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
-                    <td th:text="${client.client.name}">Name</td>
-                    <td th:text="${{client.client.birthday}}">Birthday</td>
-                    <td th:text="${client.mother.name}">Name</td>
-                    <td th:text="${client.father.name}">Name</td>
+                    <td th:text="${client.client.name}"></td>
+                    <td>
+                        <span th:if="${client.client.birthday != null}" th:text="${{client.client.birthday}}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${client.mother != null}" th:text="${client.mother.name}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${client.father != null}" th:text="${client.father.name}"></span>
+                    </td>
                 </tr>
             </table>
         </div>
