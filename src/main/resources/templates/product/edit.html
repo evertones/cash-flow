@@ -18,6 +18,12 @@
 
         <form class="form-horizontal" th:object="${product}" th:action="@{/product/add}" method="post">
 
+            <div th:if="${flashMessage}">
+                <div class="text-center" th:classappend="${cssClass}">
+                    <span th:text="${flashMessage}"></span>
+                </div>
+            </div>
+
             <input type="hidden" class="form-control" th:field="*{id}"/>
 
             <div class="form-group">
