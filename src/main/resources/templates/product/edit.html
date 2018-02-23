@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CashFlow - Pet Project</title>
+
+    <div th:replace="layout/header :: header-css"></div>
+</head>
+<body>
+
+    <div th:replace="layout/header :: header"></div>
+
+    <div class="container">
+
+        <legend>
+            <span th:text="#{module.product.title}"></span> - <span th:text="#{module.general.add.title}"></span>
+        </legend>
+
+        <form class="form-horizontal" th:object="${product}" th:action="@{/product/add}" method="post">
+
+            <div th:if="${flashMessage}">
+                <div class="text-center" th:classappend="${cssClass}">
+                    <span th:text="${flashMessage}"></span>
+                </div>
+            </div>
+
+            <input type="hidden" class="form-control" th:field="*{id}"/>
+
+            <div class="form-group">
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
+                        <input type="text" class="form-control" th:field="*{name}" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.product.price.label}"></span></label>
+                        <input type="text" class="form-control" th:field="*{price}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-group col-md-12">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.product.description.label}"></span></label>
+                        <textarea class="form-control" rows="5" th:field="*{description}"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary"><span th:text="#{module.general.save.button}"></span></button>
+                    <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div th:replace="layout/footer :: footer-scripts"></div>
+
+</body>
+</html>

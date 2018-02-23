@@ -19,11 +19,8 @@
         </legend>
 
         <form class="form-horizontal" th:object="${client}" th:action="@{/client/add}" method="post">
-            <div class="form-group">
-                <div class="col-md-6 col-sm-10">
-                    <input type="hidden" class="form-control" th:field="*{id}"/>
-                </div>
-            </div>
+
+            <input type="hidden" class="form-control" th:field="*{id}"/>
 
             <div th:if="${flashMessage}">
                 <div class="text-center" th:classappend="${cssClass}">

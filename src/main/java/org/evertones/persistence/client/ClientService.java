@@ -20,7 +20,7 @@ public class ClientService {
 
     public Client save(Client client) {
 
-        if (client.getId() == null) {
+        if (client.getCreatedAt() == null) {
             client.setCreatedAt(LocalDate.now());
         }
         client.setUpdatedAt(LocalDate.now());
