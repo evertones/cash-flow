@@ -117,4 +117,12 @@ public class ClientController {
         return "/client/search";
     }
 
+    @RequestMapping(path = "/client/delete/{id}")
+    public String delete(Model model, @PathVariable(name = "id") Integer id) {
+        model.addAttribute("client", new Client());
+        clientRepository.delete(id);
+
+        return "/client/search";
+    }
+
 }

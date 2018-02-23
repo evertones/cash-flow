@@ -72,14 +72,24 @@
         </form>
     </div>
 
+
     <div class="container">
-        <div th:fragment="resultList" id="results-block">
+
+        <div th:if="${#lists.isEmpty(clients)}">
+            <div class="text-center alert alert-warning">
+                <span th:text="#{module.general.noItemsInSearch.message}"></span>
+            </div>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(clients)}">
             <table class="table table-striped">
                 <tr>
                     <th><span th:text="#{module.general.name.label}"></span></th>
                     <th><span th:text="#{module.client.birthday.label}"></span></th>
                     <th><span th:text="#{module.client.motherName.label}"></span></th>
                     <th><span th:text="#{module.client.fatherName.label}"></span></th>
+                    <th><span th:text="#{module.general.edit.label}"></span></th>
+                    <th><span th:text="#{module.general.delete.label}"></span></th>
                 </tr>
                 <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
                     <td th:text="${client.client.name}"></td>
@@ -92,6 +102,18 @@
                     <td>
                         <span th:if="${client.father != null}" th:text="${client.father.name}"></span>
                     </td>
+
+                    <td>
+                        <a th:href="${'/client/add/' + client.id}" class="btn btn-default">
+                            <span th:text="#{module.general.edit.label}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="${'/client/delete/' + client.id}" class="btn btn-default">
+                            <span th:text="#{module.general.delete.label}"></span>
+                        </a>
+                    </td>
+
                 </tr>
             </table>
         </div>
