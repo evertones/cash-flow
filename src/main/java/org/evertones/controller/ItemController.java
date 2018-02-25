@@ -22,25 +22,25 @@ public class ItemController {
     @RequestMapping(path = "/item/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("items", itemRepository.findAll());
-        return "/item/list";
+        return "item/list";
     }
 
     @RequestMapping(path = "/item/add", method = RequestMethod.GET)
     public String edit(Model model) {
         model.addAttribute("item", new Item());
-        return "/item/edit";
+        return "item/edit";
     }
 
     @RequestMapping(path = "/item/edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable(name = "id") Integer id) {
         model.addAttribute("item", itemRepository.findOne(id));
-        return "/item/edit";
+        return "item/edit";
     }
 
     @RequestMapping(path = "/item/add", method = RequestMethod.POST)
     public String submit(Item item) {
         itemRepository.save(item);
-        return "redirect:/item/list";
+        return "redirect:list";
     }
 
     @RequestMapping(path = "/item/active/toggle/{id}", method = RequestMethod.GET)
@@ -52,13 +52,13 @@ public class ItemController {
 
         itemRepository.save(item);
 
-        return "redirect:/item/list";
+        return "redirect:list";
     }
 
     @RequestMapping(path = "/item/delete/{id}", method = RequestMethod.GET)
     public String delete(Model model, @PathVariable(name = "id") Integer id) {
         itemRepository.delete(id);
-        return "redirect:/item/list";
+        return "redirect:list";
     }
 
 }

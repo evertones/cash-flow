@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Locale;
 
 @Controller
+@RequestMapping(path = "/product")
 public class ProductController {
 
     private ProductRepository productRepository;
@@ -36,26 +37,26 @@ public class ProductController {
         this.messageSource = messageSource;
     }
 
-    @RequestMapping(path = "/product/list", method = RequestMethod.GET)
+    @RequestMapping(path = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("products", productRepository.findAll());
-        return "/product/list";
+        return "product/list";
     }
 
-    @RequestMapping(path = "/product/add", method = RequestMethod.GET)
+    @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("product", new Product());
 
-        return "/product/edit";
+        return "product/edit";
     }
 
-    @RequestMapping(path = "/product/add/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/add/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable(name = "id") Integer id) {
         model.addAttribute("product", productRepository.findOne(id));
-        return "/product/edit";
+        return "product/edit";
     }
 
-    @RequestMapping(path = "/product/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String submit(Product product, RedirectAttributes attributes) {
         productService.save(product);
 
@@ -64,13 +65,13 @@ public class ProductController {
         attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, defaultLocale));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
-        return String.format("redirect:/product/add/%s", product.getId().toString());
+        return String.format("redirect:add/%s", product.getId().toString());
     }
 
-    @RequestMapping(path = "/product/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
     public String delete(Model model, @PathVariable(name = "id") Integer id) {
         productRepository.delete(id);
-        return "redirect:/product/list";
+        return "redirect:../list";
     }
 
 }

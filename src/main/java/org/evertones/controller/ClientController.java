@@ -22,6 +22,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping(path = "/client")
 public class ClientController {
 
     private ClientRepository clientRepository;
@@ -43,19 +44,19 @@ public class ClientController {
         this.messageSource = messageSource;
     }
 
-    @RequestMapping(path = "/client/add", method = RequestMethod.GET)
+    @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String edit(Model model) {
         model.addAttribute("client", new Client());
-        return "/client/edit";
+        return "client/edit";
     }
 
-    @RequestMapping(path = "/client/add/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/add/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable(name = "id") Integer id) {
         model.addAttribute("client", clientRepository.findOne(id));
-        return "/client/edit";
+        return "client/edit";
     }
 
-    @RequestMapping(path = "/client/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String submit(Client client, RedirectAttributes attributes) {
         clientService.save(client);
 
@@ -64,10 +65,10 @@ public class ClientController {
         attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, defaultLocale));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
-        return String.format("redirect:/client/add/%s", client.getId().toString());
+        return String.format("redirect:add/%s", client.getId().toString());
     }
 
-    @RequestMapping(path = "/client/dashboard", method = RequestMethod.GET)
+    @RequestMapping(path = "/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model) {
         LocalDate now = LocalDate.now();
 
@@ -79,7 +80,7 @@ public class ClientController {
         model.addAttribute("nextMonth",     nextMonth);
         model.addAttribute("previousMonth", previousMonth);
 
-        return "/client/dashboard";
+        return "client/dashboard";
     }
 
     private List<ClientDashboardDto> buildOutput(List<Client> clients) {
@@ -99,30 +100,30 @@ public class ClientController {
         return clientsDashboardDto.stream().sorted(byDayOfMonth).collect(Collectors.toList());
     }
 
-    @RequestMapping(path = "/client/search", method = RequestMethod.GET)
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("client", new Client());
         model.addAttribute("clients", new ArrayList<Client>());
 
-        return "/client/search";
+        return "client/search";
     }
 
-    @RequestMapping(path = "/client/search", method = RequestMethod.POST)
+    @RequestMapping(path = "/search", method = RequestMethod.POST)
     public String listResults(Client client, BindingResult bindingResult, Model model) {
         List<Client> list = clientService.findAll(client);
 
         model.addAttribute("client", client);
         model.addAttribute("clients", list);
 
-        return "/client/search";
+        return "client/search";
     }
 
-    @RequestMapping(path = "/client/delete/{id}")
+    @RequestMapping(path = "/delete/{id}")
     public String delete(Model model, @PathVariable(name = "id") Integer id) {
         model.addAttribute("client", new Client());
         clientRepository.delete(id);
 
-        return "/client/search";
+        return "client/search";
     }
 
 }

@@ -23,27 +23,27 @@ public class PeriodController {
     public String list(Model model) {
         model.addAttribute("periods", periodRepository.findAll());
 
-        return "/period/list";
+        return "period/list";
     }
 
     @RequestMapping(path = "/period/edit/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable(name = "id") String id) {
         model.addAttribute("period", periodRepository.findOne(Integer.valueOf(id)));
 
-        return "/period/edit";
+        return "period/edit";
     }
 
     @RequestMapping(path = "/period/edit", method = RequestMethod.GET)
     public String edit(Model model) {
         model.addAttribute("period", new Period());
-        return "/period/edit";
+        return "period/edit";
     }
 
     @RequestMapping(path = "/period/add", method = RequestMethod.POST)
     public String submit(Period period) {
         periodRepository.save(period);
 
-        return "redirect:/period/list";
+        return "redirect:list";
     }
 
 }
