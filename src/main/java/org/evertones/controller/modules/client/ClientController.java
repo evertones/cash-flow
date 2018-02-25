@@ -2,6 +2,9 @@ package org.evertones.controller.modules.client;
 
 import org.evertones.controller.dto.ClientDashboardDto;
 import org.evertones.model.modules.client.Client;
+import org.evertones.model.modules.client.ClientDetails;
+import org.evertones.persistence.modules.client.ClientDetailsRepository;
+import org.evertones.persistence.modules.client.ClientDetailsService;
 import org.evertones.persistence.modules.client.ClientRepository;
 import org.evertones.persistence.modules.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ public class ClientController {
 
     private ClientRepository clientRepository;
     private ClientService    clientService;
+
     private MessageSource    messageSource;
 
     @Autowired
@@ -46,13 +50,16 @@ public class ClientController {
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String edit(Model model) {
+        model.addAttribute("clientModels", new ArrayList<ClientDetails>());
         model.addAttribute("client", new Client());
         return "client/edit";
     }
 
     @RequestMapping(path = "/add/{id}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable(name = "id") Integer id) {
-        model.addAttribute("client", clientRepository.findOne(id));
+        Client client = clientRepository.findOne(id);
+        model.addAttribute("clientModels", client.getModels());
+        model.addAttribute("client", client);
         return "client/edit";
     }
 

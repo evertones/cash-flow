@@ -3,10 +3,7 @@ package org.evertones.model.modules.client;
 import org.evertones.model.types.Sex;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -19,6 +16,9 @@ public class ClientDetails {
     private LocalDate birthday;
     private String    phone;
     private String    email;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
+    private Client    client;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,6 +76,36 @@ public class ClientDetails {
 
     public ClientDetails setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    @NotNull
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public ClientDetails setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @NotNull
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public ClientDetails setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @OneToOne
+    public Client getClient() {
+        return client;
+    }
+
+    public ClientDetails setClient(Client client) {
+        this.client = client;
         return this;
     }
 }

@@ -1,18 +1,16 @@
 package org.evertones.model.modules.client;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Client {
 
     private Integer       id;
     private ClientDetails client;
-    private ClientDetails father;
-    private ClientDetails mother;
-    private LocalDate     createdAt;
-    private LocalDate     updatedAt;
+
+    private List<ClientDetails> models = new ArrayList<ClientDetails>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,44 +33,12 @@ public class Client {
         return this;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    public ClientDetails getFather() {
-        return father;
+    @OneToMany(mappedBy = "client")
+    public List<ClientDetails> getModels() {
+        return models;
     }
 
-    public Client setFather(ClientDetails father) {
-        this.father = father;
-        return this;
+    public void setModels(List<ClientDetails> models) {
+        this.models = models;
     }
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    public ClientDetails getMother() {
-        return mother;
-    }
-
-    public Client setMother(ClientDetails mother) {
-        this.mother = mother;
-        return this;
-    }
-
-    @NotNull
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public Client setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    @NotNull
-    public LocalDate getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public Client setUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
-        return this;
-    }
-
 }

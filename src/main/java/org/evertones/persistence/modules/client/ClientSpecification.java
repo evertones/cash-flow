@@ -16,8 +16,6 @@ class ClientSpecification {
 
     static BooleanExpression queryAll(Client client) {
         QClientDetails clientDetails  = QClient.client1.client;
-        QClientDetails motherDetails  = QClient.client1.mother;
-        QClientDetails fatherDetails  = QClient.client1.father;
 
         BooleanExpression query = clientDetails.id.gt(0);
 
@@ -26,16 +24,7 @@ class ClientSpecification {
         }
 
         if (client.getClient().getBirthday() != null) {
-            System.out.println("BIRTHDAY: " + client.getClient().getBirthday());
             query = query.and(clientDetails.birthday.eq(client.getClient().getBirthday()));
-        }
-
-        if (client.getMother().getName() != null && !client.getMother().getName().isEmpty()) {
-            query = query.and(motherDetails.name.containsIgnoreCase(client.getMother().getName()));
-        }
-
-        if (client.getFather().getName() != null && !client.getFather().getName().isEmpty()) {
-            query = query.and(fatherDetails.name.containsIgnoreCase(client.getFather().getName()));
         }
 
         return query;

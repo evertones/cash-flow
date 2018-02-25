@@ -20,18 +20,10 @@ public class ClientService {
 
     public Client save(Client client) {
 
-        if (client.getCreatedAt() == null) {
-            client.setCreatedAt(LocalDate.now());
+        if (client.getClient().getCreatedAt() == null) {
+            client.getClient().setCreatedAt(LocalDate.now());
         }
-        client.setUpdatedAt(LocalDate.now());
-
-        if (client.getMother().getName().isEmpty()) {
-            client.setMother(null);
-        }
-
-        if (client.getFather().getName().isEmpty()) {
-            client.setFather(null);
-        }
+        client.getClient().setUpdatedAt(LocalDate.now());
 
         return clientRepository.save(client);
     }

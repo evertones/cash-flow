@@ -10,178 +10,132 @@
 </head>
 <body>
 
-    <div th:replace="layout/header :: header"></div>
+<div th:replace="layout/header :: header"></div>
 
-    <div class="container">
+<div class="container">
 
-        <legend>
-            <span th:text="#{module.client.title}"></span> - <span th:text="#{module.general.add.title}"></span>
-        </legend>
+    <legend>
+        <span th:text="#{module.client.title}"></span> - <span th:text="#{module.general.add.title}"></span>
+    </legend>
 
-        <form class="form-horizontal" th:object="${client}" th:action="@{/client/add}" method="post">
+    <form class="form-horizontal" th:object="${client}" th:action="@{/client/add}" method="post">
 
-            <input type="hidden" class="form-control" th:field="*{id}"/>
+        <input type="hidden" class="form-control" th:field="*{id}"/>
 
-            <div th:if="${flashMessage}">
-                <div class="text-center" th:classappend="${cssClass}">
-                    <span th:text="${flashMessage}"></span>
-                </div>
+        <div th:if="${flashMessage}">
+            <div class="text-center" th:classappend="${cssClass}">
+                <span th:text="${flashMessage}"></span>
             </div>
+        </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading"><span th:text="#{module.client.modelDetails.panel}"></span></div>
-                <div class="panel-body">
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{client.name}" required="true"/>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
-                            <div id="datepicker1" class="input-group date">
-                                <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datepicker1').datepicker({
-                                        todayHighlight: true,
-                                        format: 'dd/mm/yyyy',
-                                        clearBtn: true
-                                    });
-                                });
-                            </script>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.email.label}"></span></label>
-                            <input type="email" class="form-control" th:field="*{client.email}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.phone.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{client.phone}" />
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.sex.label}"></span></label>
-                            <select class="form-control" th:field="*{client.sex}">
-                                <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
-                                <option th:each="sex : ${T(org.evertones.model.types.Sex).values()}"
-                                        th:value="${sex}"
-                                        th:text="#{${sex.phrase}}"
-                                        >
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+        <div class="form-group col-md-6">
+            <div class="col-md-12">
+                <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
+                <input type="text" class="form-control" th:field="*{client.name}" required="true"/>
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading"><span th:text="#{module.client.motherDetails.panel}"></span></div>
-                <div class="panel-body">
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{mother.name}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
-                            <div id="datepicker2" class="input-group date">
-                                <input type="text" class="form-control"  th:field="*{{mother.birthday}}"/>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datepicker2').datepicker({
-                                        todayHighlight: true,
-                                        format: 'dd/mm/yyyy',
-                                        clearBtn: true
-                                    });
-                                });
-                            </script>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.email.label}"></span></label>
-                            <input type="email" class="form-control" th:field="*{mother.email}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.phone.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{mother.phone}" />
-                        </div>
-                    </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="col-md-12">
+                <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
+                <div id="datepicker1" class="input-group date">
+                    <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datepicker1').datepicker({
+                            todayHighlight: true,
+                            format: 'dd/mm/yyyy',
+                            clearBtn: true
+                        });
+                    });
+                </script>
             </div>
+        </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading"><span th:text="#{module.client.fatherDetails.panel}"></span></div>
-                <div class="panel-body">
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{father.name}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
-                            <div id="datepicker3" class="input-group date">
-                                <input type="text" class="form-control"  th:field="*{{father.birthday}}"/>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datepicker3').datepicker({
-                                        todayHighlight: true,
-                                        format: 'dd/mm/yyyy',
-                                        clearBtn: true
-                                    });
-                                });
-                            </script>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.email.label}"></span></label>
-                            <input type="email" class="form-control" th:field="*{father.email}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="col-md-12">
-                            <label class="control-label"><span th:text="#{module.client.phone.label}"></span></label>
-                            <input type="text" class="form-control" th:field="*{father.phone}" />
-                        </div>
-                    </div>
-                </div>
+        <div class="form-group col-md-6">
+            <div class="col-md-12">
+                <label class="control-label"><span th:text="#{module.client.email.label}"></span></label>
+                <input type="email" class="form-control" th:field="*{client.email}" />
             </div>
-
-            <div class="form-group">
-                <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary"><span th:text="#{module.general.save.button}"></span></button>
-                    <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
-                </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="col-md-12">
+                <label class="control-label"><span th:text="#{module.client.phone.label}"></span></label>
+                <input type="text" class="form-control" th:field="*{client.phone}" />
             </div>
+        </div>
 
-        </form>
+        <div class="form-group col-md-6">
+            <div class="col-md-12">
+                <label class="control-label"><span th:text="#{module.client.sex.label}"></span></label>
+                <select class="form-control" th:field="*{client.sex}">
+                    <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
+                    <option th:each="sex : ${T(org.evertones.model.types.Sex).values()}"
+                            th:value="${sex}"
+                            th:text="#{${sex.phrase}}"
+                    >
+                    </option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-12">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary"><span th:text="#{module.general.save.button}"></span></button>
+                <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
+            </div>
+            <div th:if="(*{id} != null)" class="col-md-6 text-right">
+                <a th:href="${'/client/model/add/' + id}" class="btn btn-default"><span th:text="#{module.client.addModel.button}"></span></a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="container">
+    <div th:if="${#lists.isEmpty(clientModels)}">
+        <div class="text-center alert alert-warning">
+            <span th:text="#{module.client.model.noModelForClient.message}"></span>
+        </div>
     </div>
 
-    <div th:replace="layout/footer :: footer-scripts"></div>
+    <div th:if="${not #lists.isEmpty(clientModels)}">
+        <table class="table table-striped">
+            <tr>
+                <th><span th:text="#{module.general.name.label}"></span></th>
+                <th><span th:text="#{module.client.birthday.label}"></span></th>
+                <th><span th:text="#{module.client.sex.label}"></span></th>
+                <th><span th:text="#{module.general.edit.label}"></span></th>
+                <th><span th:text="#{module.general.delete.label}"></span></th>
+            </tr>
+            <tr th:each="clientModel : ${clientModels}" th:attr="data-item-id=${clientModel.id}">
+                <td th:text="${clientModel.name}"></td>
+                <td>
+                    <span th:if="${clientModel.birthday != null}" th:text="${{clientModel.birthday}}"></span>
+                </td>
+                <td>
+                    <span th:if="${clientModel.sex != null}" th:text="#{${clientModel.sex.phrase}}"></span>
+                </td>
+
+                <td>
+                    <a th:href="${'/client/model/edit/' + clientModel.id}" class="btn btn-default">
+                        <span th:text="#{module.general.edit.label}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="${'/client/model/delete/' + clientModel.id}" class="btn btn-default">
+                        <span th:text="#{module.general.delete.label}"></span>
+                    </a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="layout/footer :: footer-scripts"></div>
 
 </body>
 </html>

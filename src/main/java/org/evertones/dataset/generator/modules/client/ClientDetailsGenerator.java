@@ -19,6 +19,7 @@ public class ClientDetailsGenerator implements BaseGenerator<ClientDetails> {
     private EmailGenerator emailGenerator = new EmailGenerator();
     private PhoneGenerator phoneGenerator = new PhoneGenerator();
 
+
     @Override
     public ClientDetails generate() {
         return new ClientDetails()
@@ -27,6 +28,8 @@ public class ClientDetailsGenerator implements BaseGenerator<ClientDetails> {
             .setBirthday(randomDate.randomLocalDate())
             .setSex(randomSex.randomSex())
             .setEmail(emailGenerator.generate())
-            .setPhone(phoneGenerator.generate());
+            .setPhone(phoneGenerator.generate())
+            .setCreatedAt(randomDate.randomLocalDate())
+            .setUpdatedAt(randomDate.randomLocalDate());
     }
 }
