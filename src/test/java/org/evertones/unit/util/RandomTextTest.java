@@ -1,7 +1,7 @@
 package org.evertones.unit.util;
 
 
-import org.evertones.util.RandomText;
+import org.evertones.dataset.generator.util.RandomText;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
 package org.evertones.unit.util;
 
 
-import org.evertones.generator.common.EmailGenerator;
+import org.evertones.dataset.generator.common.EmailGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
