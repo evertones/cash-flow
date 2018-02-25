@@ -1,7 +1,7 @@
 package org.evertones.dataset;
 
-import org.evertones.generator.client.ClientGenerator;
-import org.evertones.persistence.client.ClientRepository;
+import org.evertones.dataset.generator.modules.client.ClientGenerator;
+import org.evertones.persistence.modules.client.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

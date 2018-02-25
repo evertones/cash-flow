@@ -21,6 +21,14 @@ public class UsersService implements UserDetailsService {
     }
 
 
+    /**
+     * This method is used by Spring Security to authenticate users.
+     * https://docs.spring.io/spring-security/site/docs/3.1.x/reference/springsecurity-single.html#tech-userdetailsservice
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usersRepository.findOne(username);

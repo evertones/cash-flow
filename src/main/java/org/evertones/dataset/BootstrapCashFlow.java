@@ -1,9 +1,9 @@
 package org.evertones.dataset;
 
-import org.evertones.generator.cashflow.DefaultItemGenerator;
-import org.evertones.generator.cashflow.PeriodGenerator;
-import org.evertones.persistence.cashflow.DefaultItemRepository;
-import org.evertones.persistence.cashflow.PeriodRepository;
+import org.evertones.dataset.generator.modules.cashflow.DefaultItemGenerator;
+import org.evertones.dataset.generator.modules.cashflow.PeriodGenerator;
+import org.evertones.persistence.modules.cashflow.DefaultItemRepository;
+import org.evertones.persistence.modules.cashflow.PeriodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

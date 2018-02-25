@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Locale;
 
 @Controller
+@RequestMapping(path = "/system")
 public class SystemController {
 
     private MessageSource messageSource;
@@ -19,11 +20,11 @@ public class SystemController {
         this.messageSource = messageSource;
     }
 
-    @RequestMapping(path = "/system/test", method = RequestMethod.GET)
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String testPage(Model model) {
         model.addAttribute("message_en", messageSource.getMessage("message", null, Locale.US));
         model.addAttribute("message_pt", messageSource.getMessage("message", null, new Locale("pt")));
-        return "system/test";
+        return "test";
     }
 
 

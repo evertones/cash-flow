@@ -17,7 +17,7 @@ public class BadRequestController {
     @RequestMapping(path = "/403", method = RequestMethod.GET)
     public String error403(Principal principal) {
         logger.info("User"  + principal.getName());
-        return "/error/403";
+        return "error/403";
     }
 
 }
