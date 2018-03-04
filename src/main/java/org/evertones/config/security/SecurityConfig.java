@@ -27,13 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .authorizeRequests()
-                .antMatchers("/").permitAll()
-
                 // The code below is to allow H2 console to be accessed (even for users that are not logged in)
                 .antMatchers("/h2/**", "/console/**").permitAll()
 
-                .antMatchers("/period/**").hasAnyRole("ADMIN")
+                .antMatchers("/").hasAnyRole("USER")
                 .antMatchers("/index", "/**").hasAnyRole("USER")
+                .antMatchers("/period/**").hasAnyRole("ADMIN")
 
                 .anyRequest().authenticated()
             .and()
