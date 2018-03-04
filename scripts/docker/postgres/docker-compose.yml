@@ -6,6 +6,7 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_USER: studio
       POSTGRES_PASSWORD: example
     ports:
       - 8282:5432

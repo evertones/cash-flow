@@ -59,18 +59,9 @@ public class CashFlowApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-//
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.getenv().forEach((p,y) -> System.out.println(p.toString() + " = " + y.toString()));
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-//        System.out.println("-------------------------------------------");
-
         String profile = System.getenv("spring.profiles.active");
         logger.info(String.format("Profile: {%s}", profile));
-        if (profile != null && !profile.equalsIgnoreCase("prod")) {
+        if (profile != null && profile.equalsIgnoreCase("dev")) {
             logger.info("Running bootstrap process to start up the fixture data");
             bootstrap.run();
         }
