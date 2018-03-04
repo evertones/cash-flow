@@ -1,12 +1,12 @@
 package org.evertones.persistence.modules.client;
 
 import org.evertones.model.modules.client.Client;
+import org.evertones.model.modules.client.ClientDetails;
+import org.evertones.model.modules.client.QClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
 
 @Service
 public class ClientService {
@@ -28,12 +28,8 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public List<Client> findByMonthOfBirth(Month month) {
-        return (List<Client>) clientRepository.findAll(ClientSpecification.queryClientBirthday(month));
-    }
-
-    public List<Client> findAll(Client client) {
-        return (List<Client>) clientRepository.findAll(ClientSpecification.queryAll(client));
+    public Client findByClientDetails(ClientDetails clientDetails) {
+        return clientRepository.findOne(QClient.client1.client.eq(clientDetails));
     }
 
 }

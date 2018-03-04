@@ -5,14 +5,7 @@ import org.evertones.model.modules.client.Client;
 import org.evertones.model.modules.client.QClient;
 import org.evertones.model.modules.client.QClientDetails;
 
-import java.time.Month;
-
 class ClientSpecification {
-
-    static BooleanExpression queryClientBirthday(Month month) {
-        QClientDetails clientDetails  = QClient.client1.client;
-        return clientDetails.birthday.month().eq(month.getValue());
-    }
 
     static BooleanExpression queryAll(Client client) {
         QClientDetails clientDetails  = QClient.client1.client;

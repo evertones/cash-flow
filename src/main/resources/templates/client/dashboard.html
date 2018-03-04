@@ -12,44 +12,57 @@
     <div class="container">
 
         <legend>
+            <i class="fas fa-birthday-cake icon"></i>
             <span th:text="#{module.client.title}"></span> - <span th:text="#{module.client.dashboard.title}"></span>
         </legend>
 
         <div class="col-md-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <span th:text="#{module.client.dashboard.currentMonth.label}"></span>
+            <div class="col-md-12">
+                <div class="panel-bday-title green">
+                    <h4 th:text="#{module.client.dashboard.currentMonth.label}"></h4>
                 </div>
-                <div class="panel-body">
-                    <div th:each="client: ${currentMonth}">
-                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <span th:text="#{module.client.dashboard.nextMonth.label}"></span>
-                </div>
-                <div class="panel-body">
-                    <div th:each="client: ${nextMonth}">
-                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
-                    </div>
+                <div class="panel-bday-results">
+                    <table>
+                        <tr th:each="client: ${currentMonth}">
+                            <td><p><i class="shortDateFormat" th:text="${client.birthday}"></i></p></td>
+                            <td><p>&nbsp;:&nbsp;</p></td>
+                            <td><p><span th:text="${client.name}"></span></p> </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <span th:text="#{module.client.dashboard.previousMonth.label}"></span>
+            <div class="col-md-12">
+                <div class="panel-bday-title blue">
+                    <h4 th:text="#{module.client.dashboard.nextMonth.label}"></h4>
                 </div>
-                <div class="panel-body">
-                    <div th:each="client: ${previousMonth}">
-                        <p><i class="shortDateFormat" th:text="${client.birthday}"></i>: <span th:text="${client.name}"></span></p>
-                    </div>
+                <div class="panel-bday-results">
+                    <table>
+                        <tr th:each="client: ${nextMonth}">
+                            <td><p><i class="shortDateFormat" th:text="${client.birthday}"></i></p></td>
+                            <td><p>&nbsp;:&nbsp;</p></td>
+                            <td><p><span th:text="${client.name}"></span></p> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <div class="panel-bday-title red">
+                    <h4 th:text="#{module.client.dashboard.previousMonth.label}"></h4>
+                </div>
+                <div class="panel-bday-results">
+                    <table>
+                        <tr th:each="client: ${previousMonth}">
+                            <td><p><i class="shortDateFormat" th:text="${client.birthday}"></i></p></td>
+                            <td><p>&nbsp;:&nbsp;</p></td>
+                            <td><p><span th:text="${client.name}"></span></p> </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 package org.evertones.controller.dto;
 
 
+import org.evertones.model.types.ClientType;
+
 import java.time.LocalDate;
 
 public class ClientDashboardDto {
@@ -9,7 +11,7 @@ public class ClientDashboardDto {
         super();
     }
 
-    public ClientDashboardDto(String name, LocalDate birthday, String type) {
+    public ClientDashboardDto(String name, LocalDate birthday, ClientType type) {
         super();
         this.name = name;
         this.birthday = birthday;
@@ -17,10 +19,10 @@ public class ClientDashboardDto {
         this.type = type;
     }
 
-    private String    name;
-    private LocalDate birthday;
-    private Integer   dayOfMonth;
-    private String    type; //client, mother, father
+    private String     name;
+    private LocalDate  birthday;
+    private Integer    dayOfMonth;
+    private ClientType type;
 
     public String getName() {
         return name;
@@ -46,11 +48,11 @@ public class ClientDashboardDto {
         this.dayOfMonth = dayOfMonth;
     }
 
-    public String getType() {
+    public ClientType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ClientType type) {
         this.type = type;
     }
 }

@@ -16,22 +16,31 @@
     <div class="container">
 
         <legend>
+            <i class="fas fa-search icon"></i>
             <span th:text="#{module.client.title}"></span> - <span th:text="#{module.general.search.title}"></span>
         </legend>
 
-        <form class="form-horizontal" th:object="${client}" th:action="@{/client/search}" method="post">
+        <form class="form-horizontal" th:action="@{/client/search}" method="post">
+
+            <div th:if="${flashMessage}">
+                <div class="text-center" th:classappend="${flashMessage.cssClass}">
+                    <span th:text="${flashMessage.message}"></span>
+                </div>
+            </div>
+
+
             <div class="form-group">
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
-                        <input type="text" class="form-control" th:field="*{client.name}" />
+                        <input type="text" class="form-control" th:field="${client.name}" />
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
                         <div id="datepicker1" class="input-group date">
-                            <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
+                            <input type="text" class="form-control"  th:field="${{client.birthday}}"/>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
                         <script type="text/javascript">
@@ -50,20 +59,35 @@
             <div class="form-group">
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label"><span th:text="#{module.client.motherName.label}"></span></label>
-                        <input type="text" class="form-control" th:field="*{mother.name}" />
+                        <label class="control-label"><span th:text="#{module.client.sex.label}"></span></label>
+                        <select class="form-control" th:field="${client.sex}">
+                            <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
+                            <option th:each="sex : ${T(org.evertones.model.types.Sex).values()}"
+                                    th:value="${sex}"
+                                    th:text="#{${sex.phrase}}"
+                            >
+                            </option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label"><span th:text="#{module.client.fatherName.label}"></span></label>
-                        <input type="text" class="form-control" th:field="*{father.name}" />
+                        <label class="control-label"><span th:text="#{module.client.type.label}"></span></label>
+                        <select class="form-control" th:value="${clientType}" name="clientType">
+                            <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
+                            <option th:each="ct : ${T(org.evertones.model.types.ClientType).values()}"
+                                    th:value="${ct}"
+                                    th:text="#{${ct.phrase}}"
+                            >
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <button type="submit" class="btn btn-primary"><span th:text="#{module.general.search.button}"></span></button>
                     <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
                 </div>
@@ -86,30 +110,28 @@
                 <tr>
                     <th><span th:text="#{module.general.name.label}"></span></th>
                     <th><span th:text="#{module.client.birthday.label}"></span></th>
-                    <th><span th:text="#{module.client.motherName.label}"></span></th>
-                    <th><span th:text="#{module.client.fatherName.label}"></span></th>
+                    <th><span th:text="#{module.client.sex.label}"></span></th>
                     <th><span th:text="#{module.general.edit.label}"></span></th>
                     <th><span th:text="#{module.general.delete.label}"></span></th>
                 </tr>
                 <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
-                    <td th:text="${client.client.name}"></td>
+                    <td th:text="${client.name}"></td>
                     <td>
-                        <span th:if="${client.client.birthday != null}" th:text="${{client.client.birthday}}"></span>
+                        <span th:if="${client.birthday != null}" th:text="${{client.birthday}}"></span>
                     </td>
                     <td>
-                        <span th:if="${client.mother != null}" th:text="${client.mother.name}"></span>
-                    </td>
-                    <td>
-                        <span th:if="${client.father != null}" th:text="${client.father.name}"></span>
+                        <span th:if="${client.sex != null}" th:text="#{${client.sex.phrase}}"></span>
                     </td>
 
                     <td>
-                        <a th:href="${'/client/add/' + client.id}" class="btn btn-default">
+                        <a class="btn btn-default" th:if="${client.client == null}"
+                           th:href="${'/client/editByDetail/' + client.id}">
                             <span th:text="#{module.general.edit.label}"></span>
                         </a>
                     </td>
                     <td>
-                        <a th:href="${'/client/delete/' + client.id}" class="btn btn-default">
+                        <a class="btn btn-default" th:if="${client.client == null}"
+                           th:href="${'/client/deleteByDetail/' + client.id}">
                             <span th:text="#{module.general.delete.label}"></span>
                         </a>
                     </td>
