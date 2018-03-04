@@ -15,6 +15,7 @@
 <div class="container">
 
     <legend>
+        <i class="far fa-address-book icon"></i>
         <span th:text="#{module.client.title}"></span> - <span th:text="#{module.general.add.title}"></span>
     </legend>
 
@@ -36,7 +37,7 @@
         </div>
         <div class="form-group col-md-6">
             <div class="col-md-12">
-                <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
+                <label class="control-label"><span th:text="#{module.client.birthday.label}" required="true"></span></label>
                 <div id="datepicker1" class="input-group date">
                     <input type="text" class="form-control"  th:field="*{{client.birthday}}"/>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>

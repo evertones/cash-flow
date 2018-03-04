@@ -24,7 +24,7 @@ public class SystemController {
     public String testPage(Model model) {
         model.addAttribute("message_en", messageSource.getMessage("message", null, Locale.US));
         model.addAttribute("message_pt", messageSource.getMessage("message", null, new Locale("pt")));
-        return "test";
+        return "system/test";
     }
 
 

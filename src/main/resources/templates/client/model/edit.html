@@ -38,7 +38,7 @@
             <div class="form-group col-md-6">
                 <div class="col-md-12">
                     <label class="control-label"><span th:text="#{module.client.birthday.label}"></span></label>
-                    <div id="datepicker1" class="input-group date">
+                    <div id="datepicker1" class="input-group date" required="true">
                         <input type="text" class="form-control"  th:field="*{{birthday}}"/>
                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
@@ -70,7 +70,7 @@
             <div class="form-group col-md-6">
                 <div class="col-md-12">
                     <label class="control-label"><span th:text="#{module.client.sex.label}"></span></label>
-                    <select class="form-control" th:field="*{sex}">
+                    <select class="form-control" th:field="*{sex}" required="true">
                         <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
                         <option th:each="sex : ${T(org.evertones.model.types.Sex).values()}"
                                 th:value="${sex}"
