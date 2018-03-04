@@ -1,4 +1,50 @@
 body {
     min-height: 2000px;
     padding-top: 70px;
+
+    font-family: 'Raleway', sans-serif;
+}
+
+i.icon {
+    color: #dddddd;
+    padding-right: 10px;
+}
+
+.panel-bday-title {
+    color: #555;
+}
+
+.panel-bday-title.green {
+    border-bottom: 4px solid green;
+}
+
+.panel-bday-title.blue {
+    border-bottom: 4px solid blue;
+}
+
+.panel-bday-title.red {
+    border-bottom: 4px solid red;
+}
+
+.panel-bday-results {
+    margin-left: 15px;
+    padding-top: 10px;
+    color: #777;
+}
+
+.home-image {
+    max-width: 100%;
+}
+
+.home-jumbotron {
+    border: 0;
+    background-color: white;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 480px) {
+    .home-image {
+        padding-top: 30px;
+        width: 80%;
+    }
 }
