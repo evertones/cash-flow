@@ -7,7 +7,7 @@
     <div th:replace="layout/header :: header-css"></div>
     <link id="bsdp-css" th:href="@{/webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css}" rel="stylesheet" />
     <script th:src="@{/webjars/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js}"></script>
-
+    <script th:src="@{/js/client/script.js}" src="/js/client/script.js"></script>
 </head>
 <body>
 
@@ -122,7 +122,6 @@
                     <td>
                         <span th:if="${client.sex != null}" th:text="#{${client.sex.phrase}}"></span>
                     </td>
-
                     <td>
                         <a class="btn btn-default" th:if="${client.client == null}"
                            th:href="${'/client/editByDetail/' + client.id}">
@@ -130,18 +129,38 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-default" th:if="${client.client == null}"
-                           th:href="${'/client/deleteByDetail/' + client.id}">
+                        <button class="btn btn-default delete-client"
+                                th:if="${client.client == null}"
+                                th:attr="client-detail-id=${client.id}"
+                                 data-target="#deleteClient">
                             <span th:text="#{module.general.delete.label}"></span>
-                        </a>
+                        </button>
                     </td>
-
                 </tr>
             </table>
         </div>
     </div>
 
     <div th:replace="layout/footer :: footer-scripts"></div>
+
+    <!-- Modal to confirm Client deletion -->
+    <div class="modal fade" id="deleteClient" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="far fa-trash-alt icon"></i>
+                        O registro selecionado será deletado. Confirmar operação?
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <input  type="hidden" id="modal-value" value=""/>
+                    <button type="button" class="btn btn-default confirm-yes"><span th:text="#{module.general.yes.label}"></span></button>
+                    <button type="button" class="btn btn-default confirm-no" data-dismiss="modal"><span th:text="#{module.general.no.label}"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
