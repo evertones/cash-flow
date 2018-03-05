@@ -1,5 +1,9 @@
 package org.evertones.model.modules.client;
 
+import org.evertones.model.HasCreatedAt;
+import org.evertones.model.HasId;
+import org.evertones.model.HasUpdatedAt;
+import org.evertones.model.Model;
 import org.evertones.model.types.Sex;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,7 +12,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class ClientDetails {
+public class ClientDetails implements Model,
+        HasId<ClientDetails, Integer>,
+        HasCreatedAt<ClientDetails, LocalDate>,
+        HasUpdatedAt<ClientDetails, LocalDate> {
 
     private Integer   id;
     private String    name;

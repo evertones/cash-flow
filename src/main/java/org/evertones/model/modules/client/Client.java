@@ -1,11 +1,15 @@
 package org.evertones.model.modules.client;
 
+import org.evertones.model.HasId;
+import org.evertones.model.Model;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Client {
+public class Client implements Model,
+        HasId<Client, Integer> {
 
     private Integer       id;
     private ClientDetails client;
