@@ -29,9 +29,86 @@
 
     </div>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+        This will be an Ajax call: <button id="trigger-ajax" type="button" class="btn" data-item-id="999">Call Ajax</button>
+
+        <div class="alert alert-warning">
+            <span id="ajax-result">No response so far.</span>
+        </div>
+    </div>
+
+
     <th:block th:include="layout/footer :: footer"></th:block>
 
     <div th:replace="layout/footer :: footer-scripts"></div>
+
+    <script>
+
+        // $("button" ).click(function() {
+        //     $( this ).getAttribute("data-item-id");
+        // });
+
+        $(document).ready(function () {
+            $("#trigger-ajax").click(function (event) {
+
+                //stop submit the form, we will post it manually.
+                //event.preventDefault();
+                console.log("event: " + event);
+
+                console.log("event data: " + JSON.stringify(event));
+
+                console.log("this data: " + JSON.stringify(this));
+                console.log("data-item-id: " + this.getAttribute("data-item-id"));
+
+                fire_ajax_submit();
+            });
+        });
+
+        function fire_ajax_submit() {
+            //var search = {};
+            //search["username"] = $("#username").val();
+
+            $("#trigger-ajax").prop("disabled", true);
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "/api/test/ping/123",
+                //data: JSON.stringify(search),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+
+                    var json = "<h4>Ajax Response</h4><pre>"
+                        + JSON.stringify(data, null, 4) + "</pre>";
+                    $('#ajax-result').html(json);
+
+                    console.log("SUCCESS : ", data);
+                    $("#trigger-ajax").prop("disabled", false);
+
+                },
+                error: function (e) {
+
+                    var json = "<h4>Ajax Response</h4><pre>"
+                        + e.responseText + "</pre>";
+                    $('#ajax-result').html(json);
+
+                    console.log("ERROR : ", e);
+                    $("#trigger-ajax").prop("disabled", false);
+
+                }
+            });
+
+        }
+
+    </script>
 
 </body>
 </html>
