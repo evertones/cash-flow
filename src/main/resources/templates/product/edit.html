@@ -5,6 +5,7 @@
     <title>CashFlow - Pet Project</title>
 
     <div th:replace="layout/header :: header-css"></div>
+    <script th:src="@{/js/jquery.mask.min.js}" src="/js/jquery.mask.min.js"></script>
 </head>
 <body>
 
@@ -31,13 +32,13 @@
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.general.name.label}"></span></label>
-                        <input type="text" class="form-control" th:field="*{name}" />
+                        <input type="text" class="form-control" th:field="*{name}" required="required" />
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.product.price.label}"></span></label>
-                        <input type="text" class="form-control" th:field="*{price}" />
+                        <input type="text" class="form-control money" th:field="*{price}" required="required"/>
                     </div>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                 <div class="form-group col-md-12">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.product.description.label}"></span></label>
-                        <textarea class="form-control" rows="5" th:field="*{description}"></textarea>
+                        <textarea class="form-control" rows="5" th:field="*{description}" required="required"></textarea>
                     </div>
                 </div>
             </div>

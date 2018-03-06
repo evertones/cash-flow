@@ -4,6 +4,7 @@ import org.evertones.model.HasCreatedAt;
 import org.evertones.model.HasId;
 import org.evertones.model.HasUpdatedAt;
 import org.evertones.model.Model;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,6 +48,7 @@ public class Product implements Model,
         return this;
     }
 
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
     @NotNull
     public Double getPrice() {
         return price;

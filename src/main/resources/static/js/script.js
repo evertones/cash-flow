@@ -15,4 +15,19 @@ $(document).ready(function() {
         y.innerHTML = day +"/" + month + "/" + year;
     });
 
+    /**
+     * Function to format inputs to be filled like currency - i.e. "10000.00".
+     */
+    $(".money").mask("00000000.00", {reverse: true});
+
+    $(".moneyFormat").each(function(x, y) {
+        var value = y.innerHTML;
+
+        if (value.split("")[value.length-2] === ".") {
+            value = value + "0";
+        }
+
+        y.innerHTML = value;
+    });
+
 });
