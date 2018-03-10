@@ -18,6 +18,9 @@
 - [Documentation](http://bootstrap-datepicker.readthedocs.io/en/latest/index.html)
 - [Sandbox](https://uxsolutions.github.io/bootstrap-datepicker/?markup=component&format=&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&maxViewMode=4&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&todayHighlight=on&keyboardNavigation=on&forceParse=on#sandbox)
 
+### jQuery Mask Plugin 
+- [Github - jQuery-Mask-Plugin](https://github.com/igorescobar/jQuery-Mask-Plugin)
+
 ## Docker
 
 ### Postgres
