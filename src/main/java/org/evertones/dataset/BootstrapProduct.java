@@ -1,7 +1,8 @@
 package org.evertones.dataset;
 
-import org.evertones.model.service.Product;
-import org.evertones.persistence.service.ProductRepository;
+import org.evertones.dataset.generator.modules.product.ProductGenerator;
+import org.evertones.model.modules.product.Product;
+import org.evertones.persistence.modules.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +18,14 @@ public class BootstrapProduct {
 
     public void create() {
 
-        Product studioNewBorn    = new Product().setId(1).setName("studio_new_born").setPrice(400D);
-        Product studioPregnant   = new Product().setId(2).setName("studio_pregnant").setPrice(300D);
-        Product studioGeneral    = new Product().setId(3).setName("studio_general").setPrice(250D);
-        Product externalNewBorn  = new Product().setId(4).setName("external_new_born").setPrice(600D);
-        Product externalPregnant = new Product().setId(5).setName("external_pregnant").setPrice(500D);
-        Product externalGeneral  = new Product().setId(6).setName("external_general").setPrice(450D);
+        ProductGenerator productGenerator = new ProductGenerator();
+
+        Product studioNewBorn    = productGenerator.generate().setName("studio_new_born");
+        Product studioPregnant   = productGenerator.generate().setName("studio_pregnant");
+        Product studioGeneral    = productGenerator.generate().setName("studio_general");
+        Product externalNewBorn  = productGenerator.generate().setName("external_new_born");
+        Product externalPregnant = productGenerator.generate().setName("external_pregnant");
+        Product externalGeneral  = productGenerator.generate().setName("external_general");
 
         productRepository.save(studioNewBorn);
         productRepository.save(studioPregnant);
