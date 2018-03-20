@@ -27,6 +27,11 @@ public class SystemController {
         return "system/test";
     }
 
+    @RequestMapping(path = "/test2", method = RequestMethod.GET)
+    public String testPage2() {
+        return "system/test2";
+    }
+
 
 
 }

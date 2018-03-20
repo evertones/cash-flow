@@ -2,7 +2,6 @@ package org.evertones.persistence.modules.client;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.evertones.model.modules.client.ClientDetails;
-import org.evertones.model.modules.client.QClient;
 import org.evertones.model.modules.client.QClientDetails;
 import org.evertones.model.types.ClientType;
 

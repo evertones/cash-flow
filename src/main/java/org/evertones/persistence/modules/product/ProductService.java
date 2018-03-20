@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -24,6 +25,10 @@ public class ProductService {
         product.setUpdatedAt(LocalDate.now());
 
         return productRepository.save(product);
+    }
+
+    public List<Product> findAllBy(String name) {
+        return (List<Product>) productRepository.findAll(ProductSpecification.queryProductByName(name));
     }
 
 }

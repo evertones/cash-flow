@@ -5,8 +5,15 @@
     <title>CashFlow - Pet Project</title>
 
     <div th:replace="layout/header :: header-css"></div>
+
+    <!-- Date picker -->
     <link id="bsdp-css" th:href="@{/webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css}" rel="stylesheet" />
     <script th:src="@{/webjars/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js}"></script>
+
+    <!-- Autocomplete -->
+    <script src="/js/jquery.autocomplete.min.js"></script>
+    <link rel="stylesheet" href="/css/autocomplete.css" />
+
 </head>
 <body>
 
@@ -14,67 +21,136 @@
 
     <div class="container">
 
-        <legend>Add Booking</legend>
+        <legend>
+            <i class="far fa-calendar-alt icon"></i>
+            <span th:text="#{module.client.booking.add.title}"></span> - <span th:text="#{module.general.add.title}"></span>
+        </legend>
 
         <form class="form-horizontal" th:object="${booking}" th:action="@{/booking/add}" method="post">
 
-            <div class="form-group">
-                <div class="col-md-6 col-sm-10">
-                    <input type="hidden" class="form-control" th:field="*{id}"/>
-                </div>
-            </div>
-
             <div th:if="${flashMessage}">
-                <div th:class="${cssClass}">
+                <div class="text-center" th:classappend="${cssClass}">
                     <span th:text="${flashMessage}"></span>
                 </div>
             </div>
 
-            <div class="form-group col-md-12">
-                <label class="control-label">Client:</label>
-                <input type="text" class="form-control" th:field="*{client}" required="true"/>
-            </div>
-            <div class="form-group col-md-12">
-                <label class="control-label">Date/Time:</label>
-                <div id="datepicker1" class="input-group date">
-                    <input type="text" class="form-control"  th:field="*{{dateTime}}"/>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <input type="hidden" class="form-control" th:field="*{id}"/>
+
+            <div class="form-group">
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.client.title}"></span></label>
+                        <div class="input-group">
+                            <input type="text" id="clientAutocomplete" autocomplete="off" class="form-control" required="true" />
+                            <span id="clientActionIcon" class="input-group-addon">
+                                <i class="autocomplete client far fa-keyboard"></i>
+                            </span>
+                        </div>
+                        <input type="hidden" id="clientId" class="form-control" th:field="*{client.id}" />
+                        <script>
+                            $('#clientAutocomplete').autocomplete({
+                                serviceUrl: '/api/client/list',
+                                minChars: 3,
+                                deferRequestBy: 1000,
+                                onSelect: function (suggestion) {
+                                    console.log("Client list: " + JSON.stringify(suggestion));
+
+                                    $('#clientAutocomplete').val(suggestion.value).attr("disabled", "disabled");
+                                    $('#clientId').val(suggestion.id);
+                                    $("i.autocomplete.client").attr("class", "autocomplete client fas fa-eraser");
+                                }
+                            });
+
+                            $("#clientActionIcon").click(function() {
+                                console.log("Clicked!");
+
+                                $('#clientAutocomplete').val('').removeAttr("disabled", "disabled");
+                                $('#clientId').val('');
+                                $("i.autocomplete.client").attr("class", "autocomplete client far fa-keyboard")
+                            });
+                        </script>
+                    </div>
                 </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datepicker1').datepicker({
-                            todayHighlight: true,
-                            format: 'dd/mm/yyyy',
-                            clearBtn: true
-                        });
-                    });
-                </script>
-            </div>
-            <div class="form-group col-md-12">
-                <label class="control-label">Product:</label>
-                <input type="email" class="form-control" th:field="*{product}" />
-            </div>
-            <div class="form-group col-md-12">
-                <label class="control-label">Price:</label>
-                <input type="text" class="form-control" th:field="*{price}" />
-            </div>
-            <div class="form-group col-md-12">
-                <label class="control-label">Duration:</label>
-                <input type="text" class="form-control" th:field="*{duration}" />
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.general.date.label}"></span></label>
+                        <div id="datepicker1" class="input-group date">
+                            <input type="text" class="form-control"  th:field="*{{dateTime}}"/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datepicker1').datepicker({
+                                    todayHighlight: true,
+                                    format: 'dd/mm/yyyy',
+                                    clearBtn: true
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a th:href="${'/'}" class="btn btn-default">Cancel</a>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.name.product.title}"></span></label>
+                        <div class="input-group">
+                            <input type="text" id="productAutocomplete" class="form-control" />
+                            <span id="productActionIcon" class="input-group-addon">
+                                <i class="autocomplete product fas fa-archive"></i>
+                            </span>
+                        </div>
+                        <input type="hidden" id="productId" class="form-control" th:field="*{product.id}" />
+                        <script>
+                            $('#productAutocomplete').autocomplete({
+                                serviceUrl: '/api/product/list',
+                                minChars: 3,
+                                deferRequestBy: 1000,
+                                onSelect: function (suggestion) {
+                                    console.log("Product list: " + JSON.stringify(suggestion));
+
+                                    $('#productAutocomplete').val(suggestion.value).attr("disabled", "disabled");
+                                    $('#productId').val(suggestion.id);
+                                    $("i.autocomplete.product").attr("class", "autocomplete product fas fa-eraser");
+                                }
+                            });
+
+                            $("#productActionIcon").click(function() {
+                                console.log("Clicked!");
+
+                                $('#productAutocomplete').val('').removeAttr("disabled", "disabled");
+                                $('#productId').val('');
+                                $("i.autocomplete.product").attr("class", "autocomplete product fas fa-archive")
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12">
+                        <label class="control-label"><span th:text="#{module.product.price.label}"></span></label>
+                        <input type="text" class="form-control" th:field="*{price}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="control-label"><span th:text="#{module.general.description.label}"></span></label>
+                <input type="text" class="form-control" th:field="*{description}" />
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary"><span th:text="#{module.general.save.button}"></span></button>
+                    <a th:href="${'/'}" class="btn btn-default"><span th:text="#{module.general.cancel.button}"></span></a>
+                    <button type="reset" class="btn btn-primary"><span th:text="#{module.general.reset.button}"></span></button>
                 </div>
             </div>
 
         </form>
     </div>
 
-    <script type="text/javascript"
-            src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div th:replace="layout/footer :: footer-scripts"></div>
 
 </body>
 </html>

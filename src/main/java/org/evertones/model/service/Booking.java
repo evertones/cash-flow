@@ -1,13 +1,16 @@
 package org.evertones.model.service;
 
-import org.evertones.model.client.Client;
+import org.evertones.model.Model;
+import org.evertones.model.modules.client.Client;
+import org.evertones.model.modules.product.Product;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
-public class Booking {
+public class Booking implements Model {
 
     private Integer       id;
     private Client        client;
@@ -15,6 +18,7 @@ public class Booking {
     private Duration      duration;
     private Product       product;
     private Double        price;
+    private String        description;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +39,7 @@ public class Booking {
         this.client = client;
     }
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -68,4 +73,11 @@ public class Booking {
         this.price = price;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

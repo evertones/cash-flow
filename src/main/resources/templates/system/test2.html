@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CashFlow - Pet Project</title>
+
+    <div th:replace="layout/header :: header-css"></div>
+
+    <!--script src="jquery-3.3.1.min.js"></script-->
+    <script src="/js/jquery.autocomplete.min.js"></script>
+
+    <link rel="stylesheet" href="/css/autocomplete.css" />
+
+    <!--style>
+        .autocomplete-suggestions { border: 1px solid #ccc; border-radius: 5px; background: #FFF; overflow: auto; }
+        .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+        .autocomplete-selected { background: #F0F0F0; }
+        .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+        .autocomplete-group { padding: 2px 5px; }
+        .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+    </style-->
+
+</head>
+<body>
+
+    <div th:replace="layout/header :: header"></div>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="autocomplete">Name:</label>
+            <div class="input-group">
+                <input id="autocomplete" name="country" type="text" class="form-control" />
+                <div class="input-group-btn">
+                    <button id="bbb" class="btn btn-default" type="submit">
+                        <i class="autocomplete far fa-keyboard icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <input class="form-control" id="valSel" type="text" name="blah" value="" />
+
+    </div>
+    <script>
+        $('#autocomplete').autocomplete({
+            serviceUrl: '/api/test/ping/listRaw',
+            onSelect: function (suggestion) {
+                console.log("ping!!!" + JSON.stringify(suggestion));
+                $('#valSel').val('');
+                $('#valSel').val(suggestion.value);
+                $("#autocomplete").attr("disabled", "disabled");
+                $("i.autocomplete").attr("class", "autocomplete fas fa-eraser icon");
+            }
+        });
+
+        $("#bbb").click(function() {
+            console.log("Clicked!");
+            $('#valSel').val('');
+            $('#autocomplete').val('');
+            $("#autocomplete").removeAttr("disabled", "disabled");
+            $("i.autocomplete").attr("class", "autocomplete far fa-keyboard icon")
+        });
+
+    </script>
+
+</body>
+</html>
