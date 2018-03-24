@@ -10,7 +10,7 @@
 - [Github - Thymeleaf Extras with Spring Security](https://github.com/thymeleaf/thymeleaf-extras-springsecurity)
 
 ## Thymeaf and Ajax
-- [Eaxmple](http://www.marcelustrojahn.com/2016/08/spring-boot-thymeleaf-fragments-via-ajax/)
+- [Example](http://www.marcelustrojahn.com/2016/08/spring-boot-thymeleaf-fragments-via-ajax/)
 
 ## Web Components
 
@@ -21,6 +21,8 @@
 ### jQuery Mask Plugin 
 - [Github - jQuery-Mask-Plugin](https://github.com/igorescobar/jQuery-Mask-Plugin)
 
+### Ajax AutoComplete for JQuery
+- [Website](https://www.devbridge.com/sourcery/components/jquery-autocomplete/#)
 ## Docker
 
 ### Postgres
