@@ -30,4 +30,19 @@ $(document).ready(function() {
         y.innerHTML = value;
     });
 
+    /**
+     * Function to format inputs to be filled like percentage - i.e. "10.00".
+     */
+    $(".percentage").mask("000.00", {reverse: true});
+
+    $(".percentageFormat").each(function(x, y) {
+        var value = y.innerHTML;
+
+        if (value.split("")[value.length-2] === ".") {
+            value = value + "0";
+        }
+
+        y.innerHTML = value;
+    });
+
 });

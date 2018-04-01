@@ -47,3 +47,8 @@ i.icon {
         width: 80%;
     }
 }
+
+.grid-title {
+    background-color: #dddddd;
+    font-size: 15px;
+}

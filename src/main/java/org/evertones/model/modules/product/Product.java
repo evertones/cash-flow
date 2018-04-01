@@ -4,6 +4,7 @@ import org.evertones.model.HasCreatedAt;
 import org.evertones.model.HasId;
 import org.evertones.model.HasUpdatedAt;
 import org.evertones.model.Model;
+import org.evertones.model.types.ProductType;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Entity;
@@ -19,13 +20,14 @@ public class Product implements Model,
         HasCreatedAt<Product, LocalDate>,
         HasUpdatedAt<Product, LocalDate> {
 
-    private Integer   id;
-    private String    name;
-    private Double    price;
-    private String    description;
-    private Boolean   active = true;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private Integer     id;
+    private String      name;
+    private Double      price;
+    private String      description;
+    private Boolean     active = true;
+    private LocalDate   createdAt;
+    private LocalDate   updatedAt;
+    private ProductType productType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,7 +71,7 @@ public class Product implements Model,
     }
 
     @NotNull
-    public Boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
@@ -78,6 +80,7 @@ public class Product implements Model,
         return this;
     }
 
+    @NotNull
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -93,6 +96,16 @@ public class Product implements Model,
 
     public Product setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @NotNull
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public Product setProductType(ProductType productType) {
+        this.productType = productType;
         return this;
     }
 
