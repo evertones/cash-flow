@@ -6,7 +6,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class SexAttributeConterter implements AttributeConverter<Sex, String> {
+public class SexAttributeConverter implements AttributeConverter<Sex, String> {
 
     @Override
     public String convertToDatabaseColumn(Sex value) {

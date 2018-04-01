@@ -9,6 +9,7 @@ public class Bootstrap {
     private BootstrapCashFlow bootstrapCashFlow;
     private BootstrapSecurity bootstrapSecurity;
     private BootstrapClient   bootstrapClient;
+    private BootstrapProduct  bootstrapProduct;
 
     @Autowired
     public void setBootstrapCashFlow(BootstrapCashFlow bootstrapCashFlow) {
@@ -25,10 +26,16 @@ public class Bootstrap {
         this.bootstrapClient = bootstrapClient;
     }
 
+    @Autowired
+    public void setBootstrapProduct(BootstrapProduct bootstrapProduct) {
+        this.bootstrapProduct = bootstrapProduct;
+    }
+
     public void run() {
         bootstrapSecurity.create();
         bootstrapCashFlow.create();
         bootstrapClient.create();
+        bootstrapProduct.create();
     }
 
 }
