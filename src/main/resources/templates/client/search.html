@@ -73,7 +73,7 @@
 
                 <div class="form-group col-md-6">
                     <div class="col-md-12">
-                        <label class="control-label"><span th:text="#{module.client.type.label}"></span></label>
+                        <label class="control-label"><span th:text="#{module.general.type.label}"></span></label>
                         <select class="form-control" th:value="${clientType}" name="clientType">
                             <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
                             <option th:each="ct : ${T(org.evertones.model.types.ClientType).values()}"
@@ -106,37 +106,41 @@
         </div>
 
         <div th:if="${not #lists.isEmpty(clients)}">
-            <table class="table table-striped">
-                <tr>
-                    <th><span th:text="#{module.general.name.label}"></span></th>
-                    <th><span th:text="#{module.client.birthday.label}"></span></th>
-                    <th><span th:text="#{module.client.sex.label}"></span></th>
-                    <th><span th:text="#{module.general.edit.label}"></span></th>
-                    <th><span th:text="#{module.general.delete.label}"></span></th>
-                </tr>
-                <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
-                    <td th:text="${client.name}"></td>
-                    <td>
-                        <span th:if="${client.birthday != null}" th:text="${{client.birthday}}"></span>
-                    </td>
-                    <td>
-                        <span th:if="${client.sex != null}" th:text="#{${client.sex.phrase}}"></span>
-                    </td>
-                    <td>
-                        <a class="btn btn-default" th:if="${client.client == null}"
-                           th:href="${'/client/editByDetail/' + client.id}">
-                            <span th:text="#{module.general.edit.label}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <button class="btn btn-default delete-client"
-                                th:if="${client.client == null}"
-                                th:attr="client-detail-id=${client.id}"
-                                 data-target="#deleteClient">
-                            <span th:text="#{module.general.delete.label}"></span>
-                        </button>
-                    </td>
-                </tr>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="grid-title">
+                        <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.client.birthday.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.client.sex.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.edit.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.delete.label}"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="client : ${clients}" th:attr="data-item-id=${client.id}">
+                        <td th:text="${client.name}"></td>
+                        <td>
+                            <span th:if="${client.birthday != null}" th:text="${{client.birthday}}"></span>
+                        </td>
+                        <td>
+                            <span th:if="${client.sex != null}" th:text="#{${client.sex.phrase}}"></span>
+                        </td>
+                        <td>
+                            <a class="btn btn-default" th:if="${client.client == null}"
+                               th:href="${'/client/editByDetail/' + client.id}">
+                                <span th:text="#{module.general.edit.label}"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-default delete-client"
+                                    th:if="${client.client == null}"
+                                    th:attr="client-detail-id=${client.id}"
+                                     data-target="#deleteClient">
+                                <span th:text="#{module.general.delete.label}"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

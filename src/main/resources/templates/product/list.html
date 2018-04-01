@@ -24,38 +24,42 @@
         </div>
 
         <div th:if="${not #lists.isEmpty(products)}">
-            <table class="table table-striped">
-                <tr>
-                    <th>Id</th>
-                    <th><span th:text="#{module.general.name.label}"></span></th>
-                    <th><span th:text="#{module.product.price.label}"></span></th>
-                    <th><span th:text="#{module.product.description.label}"></span></th>
-                    <th><span th:text="#{module.general.active.label}"></span></th>
-                    <th><span th:text="#{module.general.edit.label}"></span></th>
-                    <th><span th:text="#{module.general.delete.label}"></span></th>
+            <table class="table table-hover">
+                <thead>
+                <tr class="grid-title">
+                    <th scope="col">Id</th>
+                    <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.product.price.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.product.description.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.active.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.edit.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.delete.label}"></span></th>
                 </tr>
-                <tr th:each="product : ${products}">
-                    <td th:text="${product.id}"></td>
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.price}" class="moneyFormat"></td>
-                    <td th:text="${product.description}"></td>
-                    <td th:if="${product.active}">
-                        <span th:text="#{module.general.yes.label}"></span>
-                    </td>
-                    <td th:if="not ${product.active}">
-                        <span th:text="#{module.general.no.label}"></span>
-                    </td>
-                    <td>
-                        <a th:href="${'/product/add/' + product.id}" class="btn btn-default">
-                            <span th:text="#{module.general.edit.label}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <a th:href="${'/product/delete/' + product.id}" class="btn btn-default">
-                            <span th:text="#{module.general.delete.label}"></span>
-                        </a>
-                    </td>
-                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.price}" class="moneyFormat"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:if="${product.active}">
+                            <span th:text="#{module.general.yes.label}"></span>
+                        </td>
+                        <td th:if="not ${product.active}">
+                            <span th:text="#{module.general.no.label}"></span>
+                        </td>
+                        <td>
+                            <a th:href="${'/product/add/' + product.id}" class="btn btn-default">
+                                <span th:text="#{module.general.edit.label}"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="${'/product/delete/' + product.id}" class="btn btn-default">
+                                <span th:text="#{module.general.delete.label}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
