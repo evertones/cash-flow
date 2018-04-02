@@ -56,7 +56,7 @@
                                 <!-- MENU CLIENT -->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span th:text="#{module.client.title}"></span><span class="caret"></span>
+                                        <span class="text-uppercase" th:text="#{module.client.title}"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
@@ -84,7 +84,7 @@
                                 <!-- MENU PRODUCT -->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span th:text="#{module.name.product.title}"></span><span class="caret"></span>
+                                        <span class="text-uppercase" th:text="#{module.name.product.title}"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a th:href="@{/product/add}"><span th:text="#{module.general.add.title}"></span></a></li>
@@ -95,7 +95,7 @@
                                 <!-- MENU OPERATION -->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span th:text="#{module.operations.title}"></span><span class="caret"></span>
+                                        <span class="text-uppercase" th:text="#{module.operations.title}"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a th:href="@{/construction}"><span th:text="#{module.general.add.title}"></span></a></li>
@@ -114,7 +114,7 @@
                                 <!-- MENU SYSTEM -->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span th:text="#{module.name.system.title}"></span><span class="caret"></span>
+                                        <span class="text-uppercase" th:text="#{module.name.system.title}"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a th:href="@{/construction}"><span th:text="#{module.system.settings.title}"></span></a></li>
@@ -126,8 +126,8 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a th:href="@{/}"><span class="glyphicon glyphicon-home"></span></a></li>
-                                <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>
-                                    <span th:text="#{module.general.signOut}"></span></a>
+                                <li><a th:href="@{/logout}">
+                                    <span class="text-uppercase" th:text="#{module.general.signOut}"></span></a>
                                 </li>
                             </ul>
                         </div><!--/.nav-collapse -->
