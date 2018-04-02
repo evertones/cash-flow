@@ -33,11 +33,13 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.general.type.label}"></span></label>
-                        <select class="form-control" th:field="*{component}" required="required">
+                        <input type="hidden" id="originalPrice" />
+                        <select id="dropdownProduct" class="form-control" th:field="*{component.id}" required="required">
                             <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
                             <option th:each="product : ${products}"
-                                    th:value="${product}"
+                                    th:value="${product.id}"
                                     th:text="${product.name}"
+                                    th:attr="data-item=${product.price}"
                             >
                             </option>
                         </select>
@@ -46,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.general.quantity.label}"></span></label>
-                        <input type="number" class="form-control" th:field="*{quantity}" required="required" />
+                        <input id="quantity" type="number" class="form-control" th:field="*{quantity}" required="required" />
                     </div>
                 </div>
             </div>
@@ -55,7 +57,7 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.general.discount.label}"></span></label>
-                        <input type="number" class="form-control" th:field="*{discount}" required="required" />
+                        <input id="discount" type="number" class="form-control" th:field="*{discount}" required="required" />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -78,6 +80,35 @@
     </div>
 
     <div th:replace="layout/footer :: footer-scripts"></div>
+
+    <script>
+        $("#dropdownProduct").on('change', function() {
+            var originalPrice = $("#dropdownProduct option[value='" + this.value + "']").attr("data-item");
+            $("#originalPrice").val(originalPrice);
+            $("#quantity").val(1);
+            $("#discount").val(0);
+            $("#price").val(originalPrice);
+        });
+
+        $("#quantity").on('blur', function() {
+           calculatePrice();
+        });
+
+        $("#discount").on('blur', function() {
+            calculatePrice();
+        });
+
+        function calculatePrice() {
+            var originalPrice = parseFloat($("#originalPrice").val());
+            var quantity = parseFloat($("#quantity").val());
+            var discount = parseFloat($("#discount").val());
+
+            var newPrice = (quantity * (1 - (discount / 100)) * originalPrice);
+            $("#price").val(newPrice);
+
+
+        }
+    </script>
 
 </body>
 </html>
