@@ -29,6 +29,7 @@
                 <tr class="grid-title">
                     <th scope="col">Id</th>
                     <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.type.label}"></span></th>
                     <th scope="col"><span th:text="#{module.product.price.label}"></span></th>
                     <th scope="col"><span th:text="#{module.product.description.label}"></span></th>
                     <th scope="col"><span th:text="#{module.general.active.label}"></span></th>
@@ -40,7 +41,8 @@
                     <tr th:each="product : ${products}">
                         <td th:text="${product.id}"></td>
                         <td th:text="${product.name}"></td>
-                        <td th:text="${product.price}" class="moneyFormat"></td>
+                        <td th:text="#{${product.productType.phrase}}"></td>
+                        <td class="moneyFormat" th:text="${product.price}"></td>
                         <td th:text="${product.description}"></td>
                         <td th:if="${product.active}">
                             <span th:text="#{module.general.yes.label}"></span>
