@@ -5,7 +5,6 @@
     <title>CashFlow - Pet Project</title>
 
     <div th:replace="layout/header :: header-css"></div>
-    <script th:src="@{/js/jquery.mask.min.js}" src="/js/jquery.mask.min.js"></script>
 </head>
 <body>
 
@@ -63,7 +62,7 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.product.price.label}"></span></label>
-                        <input type="text" class="form-control money" th:field="*{price}" readonly="readonly" />
+                        <input type="text" class="form-control" th:field="*{price}" readonly="readonly" />
                     </div>
                 </div>
             </div>
@@ -91,11 +90,15 @@
         });
 
         $("#quantity").on('blur', function() {
-           calculatePrice();
+            if ($("#originalPrice").val() !== undefined) {
+                calculatePrice();
+            }
         });
 
         $("#discount").on('blur', function() {
-            calculatePrice();
+            if ($("#originalPrice").val() !== undefined) {
+                calculatePrice();
+            }
         });
 
         function calculatePrice() {
@@ -103,11 +106,10 @@
             var quantity = parseFloat($("#quantity").val());
             var discount = parseFloat($("#discount").val());
 
-            var newPrice = (quantity * (1 - (discount / 100)) * originalPrice);
-            newPrice = round(newPrice, 2);
-            $("#price").val(newPrice);
-
-
+            var totalPrice = parseFloat((quantity * (1 - (discount / 100)) * originalPrice));
+            totalPrice = parseFloat(round(totalPrice, 2));
+            $("#price").val(totalPrice);
+            console.log("Price: " + totalPrice);
         }
     </script>
 

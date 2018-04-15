@@ -2,8 +2,8 @@ package org.evertones.controller.modules.product;
 
 import org.evertones.controller.BaseController;
 import org.evertones.model.modules.product.Product;
-import org.evertones.persistence.modules.product.SProductRepository;
-import org.evertones.persistence.modules.product.SProductService;
+import org.evertones.persistence.modules.product.ProductRepository;
+import org.evertones.persistence.modules.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,20 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/product")
 public class ProductController extends BaseController {
 
-    private SProductRepository productRepository;
-    private SProductService    productService;
+    private ProductRepository productRepository;
+    private ProductService    productService;
 
     @Autowired
-    public void setProductRepository(SProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Autowired
-    public void setProductService(SProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 
@@ -47,6 +52,30 @@ public class ProductController extends BaseController {
         Product product = productRepository.findOne(id);
         model.addAttribute("product", product);
         model.addAttribute("productComponents", product.getComponents());
+
+
+        List<Double> price = new ArrayList<Double>();
+        List<Double> priceWithDiscount = new ArrayList<Double>();
+
+        product.getComponents().forEach(component -> {
+            //Product p = productRepository.findOne()
+            price.add(component.getQuantity() * component.getComponent().getPrice());
+            priceWithDiscount.add(component.getPrice());
+        });
+
+        Double totalPrice = price.stream().mapToDouble(value -> value).sum();
+        Double discountPrice = priceWithDiscount.stream().mapToDouble(value -> value).sum();
+
+        System.out.println("Total Price: " + price.stream().mapToDouble(value -> value).sum());
+        System.out.println("Total Price with Discount: " + priceWithDiscount.stream().mapToDouble(value -> value).sum());
+
+        NumberFormat nf = DecimalFormat.getInstance();
+        nf.setMaximumFractionDigits(2);
+
+        model.addAttribute("totalPrice", nf.format(totalPrice));
+        model.addAttribute("discountPrice", nf.format(discountPrice));
+
+
 
         return "product/edit";
     }

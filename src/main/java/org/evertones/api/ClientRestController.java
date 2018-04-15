@@ -61,5 +61,4 @@ public class ClientRestController extends BaseController {
         return ResponseEntity.ok(response);
     }
 
-
 }

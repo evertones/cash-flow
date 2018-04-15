@@ -2,6 +2,7 @@ package org.evertones.model.modules.product;
 
 import org.evertones.model.HasId;
 import org.evertones.model.Model;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -70,6 +71,8 @@ public class Component implements Model, HasId<Component, Integer> {
         return this;
     }
 
+    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+    @NotNull
     public Double getPrice() {
         return price;
     }

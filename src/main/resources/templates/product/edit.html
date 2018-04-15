@@ -6,6 +6,7 @@
 
     <div th:replace="layout/header :: header-css"></div>
     <script th:src="@{/js/jquery.mask.min.js}" src="/js/jquery.mask.min.js"></script>
+    <script th:src="@{/js/product/script.js}" src="/js/product/script.js"></script>
 </head>
 <body>
 
@@ -77,12 +78,18 @@
                 </div>
             </div>
 
-            <div class="form-group" th:if="${not #lists.isEmpty(productComponents)}">
+            <div id="expected-price" class="form-group" th:if="${not #lists.isEmpty(productComponents)}">
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="alert alert-warning">
-                            <p>O valor total dos componentes e custos sem descontos é de R$ 100,00.</p>
-                            <p>O valor total dos componentes e custos com descontons é de R$ 80,00.</p>
+                            <p>
+                                <span th:text="#{module.product.totalPriceWihoutDiscout.message}"></span>
+                                <span th:text="#{module.general.currency.symbol}"></span> <span class="moneyFormat" th:text="${totalPrice}"></span>.
+                            </p>
+                            <p>
+                                <span th:text="#{module.product.totalPriceWithDiscount.message}"></span>
+                                <span th:text="#{module.general.currency.symbol}"></span> <span class="moneyFormat" th:text="${discountPrice}"></span>.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +111,7 @@
     </div>
 
     <div class="container">
-        <div th:if="${#lists.isEmpty(productComponents)}">
+        <div id='no-results' th:if="${#lists.isEmpty(productComponents)}">
             <div class="text-center alert alert-warning">
                 <span th:text="#{module.client.model.noComponentsForProduct.message}"></span>
             </div>
@@ -113,47 +120,69 @@
         <div th:if="${not #lists.isEmpty(productComponents)}">
             <table class="table table-hover">
                 <thead>
-                <tr class="grid-title">
-                    <th scope="col">Id</th>
-                    <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.general.type.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.product.price.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.product.description.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.general.active.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.general.edit.label}"></span></th>
-                    <th scope="col"><span th:text="#{module.general.delete.label}"></span></th>
-                </tr>
+                    <tr class="grid-title">
+                        <th scope="col">Id</th>
+                        <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.type.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.product.price.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.product.description.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.active.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.edit.label}"></span></th>
+                        <th scope="col"><span th:text="#{module.general.delete.label}"></span></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr th:each="productComponent : ${productComponents}">
-                    <td th:text="${productComponent.id}"></td>
-                    <td th:text="${productComponent.component.name}"></td>
-                    <td th:text="#{${productComponent.component.productType.phrase}}"></td>
-                    <td class="moneyFormat" th:text="${productComponent.price}"></td>
-                    <td th:text="${productComponent.component.description}"></td>
-                    <td th:if="${productComponent.component.active}">
-                        <span th:text="#{module.general.yes.label}"></span>
-                    </td>
-                    <td th:if="not ${productComponent.component.active}">
-                        <span th:text="#{module.general.no.label}"></span>
-                    </td>
-                    <td>
-                        <a th:href="${'/product/component/add/' + productComponent.id}" class="btn btn-default">
-                            <span th:text="#{module.general.edit.label}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <a th:href="${'/product/component/delete/' + productComponent.id}" class="btn btn-default">
-                            <span th:text="#{module.general.delete.label}"></span>
-                        </a>
-                    </td>
-                </tr>
+                    <tr th:each="productComponent : ${productComponents}" th:attr="data-item-id=${productComponent.id}">
+                        <td th:text="${productComponent.id}"></td>
+                        <td th:text="${productComponent.component.name}"></td>
+                        <td th:text="#{${productComponent.component.productType.phrase}}"></td>
+                        <td class="moneyFormat" th:text="${productComponent.price}"></td>
+                        <td th:text="${productComponent.component.description}"></td>
+                        <td th:if="${productComponent.component.active}">
+                            <span th:text="#{module.general.yes.label}"></span>
+                        </td>
+                        <td th:if="not ${productComponent.component.active}">
+                            <span th:text="#{module.general.no.label}"></span>
+                        </td>
+                        <td>
+                            <a th:href="${'/product/component/edit/' + productComponent.product.id + '/' + productComponent.id}" class="btn btn-default">
+                                <span th:text="#{module.general.edit.label}"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-default delete-component"
+                                    th:attr="data-component-id=${productComponent.id}, data-product-id=${productComponent.product.id}"
+                                    data-target="#deleteComponent">
+                                <span th:text="#{module.general.delete.label}"></span>
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
     <div th:replace="layout/footer :: footer-scripts"></div>
+
+    <!-- Modal to confirm Client deletion -->
+    <div class="modal fade" id="deleteComponent" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="far fa-trash-alt icon"></i>
+                        <span th:text="#{module.general.delete.confirm}"></span>
+                    </h4>
+                </div>
+                <div class="modal-footer">
+                    <input  type="hidden" id="modal-product-id" value=""/>
+                    <input  type="hidden" id="modal-component-id" value=""/>
+                    <button type="button" class="btn btn-default confirm-yes"><span th:text="#{module.general.yes.label}"></span></button>
+                    <button type="button" class="btn btn-default confirm-no" data-dismiss="modal"><span th:text="#{module.general.no.label}"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
