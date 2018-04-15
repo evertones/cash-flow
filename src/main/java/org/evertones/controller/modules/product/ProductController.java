@@ -2,8 +2,8 @@ package org.evertones.controller.modules.product;
 
 import org.evertones.controller.BaseController;
 import org.evertones.model.modules.product.Product;
-import org.evertones.persistence.modules.product.SProductRepository;
-import org.evertones.persistence.modules.product.SProductService;
+import org.evertones.persistence.modules.product.ProductRepository;
+import org.evertones.persistence.modules.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(path = "/product")
 public class ProductController extends BaseController {
 
-    private SProductRepository productRepository;
-    private SProductService    productService;
+    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Autowired
-    public void setProductRepository(SProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Autowired
-    public void setProductService(SProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 

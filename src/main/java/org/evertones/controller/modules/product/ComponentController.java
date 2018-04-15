@@ -3,10 +3,10 @@ package org.evertones.controller.modules.product;
 import org.evertones.controller.BaseController;
 import org.evertones.model.modules.product.Component;
 import org.evertones.model.modules.product.Product;
-import org.evertones.persistence.modules.product.SComponentRepository;
-import org.evertones.persistence.modules.product.SComponentService;
-import org.evertones.persistence.modules.product.SProductRepository;
-import org.evertones.persistence.modules.product.SProductService;
+import org.evertones.persistence.modules.product.ComponentRepository;
+import org.evertones.persistence.modules.product.ComponentService;
+import org.evertones.persistence.modules.product.ProductRepository;
+import org.evertones.persistence.modules.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,28 +19,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(path = "/product/component")
 public class ComponentController extends BaseController {
 
-    private SProductRepository productRepository;
-    private SProductService      productService;
-    private SComponentRepository componentRepository;
-    private SComponentService    componentService;
+    private ProductRepository productRepository;
+    private ProductService productService;
+    private ComponentRepository componentRepository;
+    private ComponentService componentService;
 
     @Autowired
-    public void setProductRepository(SProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Autowired
-    public void setProductService(SProductService productService) {
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 
     @Autowired
-    public void setComponentRepository(SComponentRepository componentRepository) {
+    public void setComponentRepository(ComponentRepository componentRepository) {
         this.componentRepository = componentRepository;
     }
 
     @Autowired
-    public void setComponentService(SComponentService componentService) {
+    public void setComponentService(ComponentService componentService) {
         this.componentService = componentService;
     }
 
