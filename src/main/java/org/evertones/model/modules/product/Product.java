@@ -7,12 +7,11 @@ import org.evertones.model.Model;
 import org.evertones.model.types.ProductType;
 import org.springframework.format.annotation.NumberFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product implements Model,
@@ -28,6 +27,8 @@ public class Product implements Model,
     private LocalDate   createdAt;
     private LocalDate   updatedAt;
     private ProductType productType;
+
+    private List<Component> components = new ArrayList<Component>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -109,4 +110,13 @@ public class Product implements Model,
         return this;
     }
 
+    @OneToMany(mappedBy = "product")
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public Product setComponents(List<Component> components) {
+        this.components = components;
+        return this;
+    }
 }

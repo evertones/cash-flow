@@ -3,15 +3,12 @@ package org.evertones.model.modules.product;
 import org.evertones.model.HasId;
 import org.evertones.model.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class ProductComponent implements Model, HasId<ProductComponent, Integer> {
+public class Component implements Model, HasId<Component, Integer> {
 
     private Integer   id;
     private Product   product;
@@ -30,25 +27,27 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
     }
 
     @Override
-    public ProductComponent setId(Integer id) {
+    public Component setId(Integer id) {
         this.id = id;
         return this;
     }
 
+    @OneToOne
     public Product getProduct() {
         return product;
     }
 
-    public ProductComponent setProduct(Product product) {
+    public Component setProduct(Product product) {
         this.product = product;
         return this;
     }
 
+    @OneToOne
     public Product getComponent() {
         return component;
     }
 
-    public ProductComponent setComponent(Product component) {
+    public Component setComponent(Product component) {
         this.component = component;
         return this;
     }
@@ -57,7 +56,7 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
         return discount;
     }
 
-    public ProductComponent setDiscount(Double discount) {
+    public Component setDiscount(Double discount) {
         this.discount = discount;
         return this;
     }
@@ -66,7 +65,7 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
         return quantity;
     }
 
-    public ProductComponent setQuantity(Short quantity) {
+    public Component setQuantity(Short quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -75,7 +74,7 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
         return price;
     }
 
-    public ProductComponent setPrice(Double price) {
+    public Component setPrice(Double price) {
         this.price = price;
         return this;
     }
@@ -85,7 +84,7 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
         return createdAt;
     }
 
-    public ProductComponent setCreatedAt(LocalDate createdAt) {
+    public Component setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -94,7 +93,7 @@ public class ProductComponent implements Model, HasId<ProductComponent, Integer>
         return updatedAt;
     }
 
-    public ProductComponent setUpdatedAt(LocalDate updatedAt) {
+    public Component setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
