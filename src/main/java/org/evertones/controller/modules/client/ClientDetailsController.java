@@ -1,5 +1,6 @@
 package org.evertones.controller.modules.client;
 
+import org.evertones.controller.BaseController;
 import org.evertones.controller.dto.ClientDashboardDto;
 import org.evertones.model.modules.client.Client;
 import org.evertones.model.modules.client.ClientDetails;
@@ -8,7 +9,6 @@ import org.evertones.persistence.modules.client.ClientDetailsRepository;
 import org.evertones.persistence.modules.client.ClientDetailsService;
 import org.evertones.persistence.modules.client.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,19 +21,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/client")
-public class ClientDetailsController {
+public class ClientDetailsController extends BaseController {
 
     private ClientRepository clientRepository;
 
     private ClientDetailsRepository clientDetailsRepository;
     private ClientDetailsService clientDetailsService;
-
-    private MessageSource messageSource;
 
     @Autowired
     public void setClientRepository(ClientRepository clientRepository) {
@@ -48,11 +45,6 @@ public class ClientDetailsController {
     @Autowired
     public void setClientDetailsService(ClientDetailsService clientDetailsService) {
         this.clientDetailsService = clientDetailsService;
-    }
-
-    @Autowired
-    public void setMessageSource(MessageSource messageSource) {
-        this.messageSource = messageSource;
     }
 
     /**
@@ -85,12 +77,10 @@ public class ClientDetailsController {
         clientDetailsService.save(clientDetails);
 
         // TODO: 1) Get the default locale; 2) add values for CSS classes in an Enum
-        Locale defaultLocale = new Locale("pt");
-        attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, defaultLocale));
+        attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, DEFAULT_LOCALE));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
         return String.format("redirect:edit/%s", clientDetails.getId().toString());
-
     }
 
     @RequestMapping(path = "/model/delete/{id}", method = RequestMethod.GET)
@@ -153,6 +143,5 @@ public class ClientDetailsController {
 
         return clientsDashboardDto.stream().sorted(byDayOfMonth).collect(Collectors.toList());
     }
-
 
 }
