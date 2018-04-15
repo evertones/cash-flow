@@ -77,6 +77,17 @@
                 </div>
             </div>
 
+            <div class="form-group" th:if="${not #lists.isEmpty(productComponents)}">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            <p>O valor total dos componentes e custos sem descontos é de R$ 100,00.</p>
+                            <p>O valor total dos componentes e custos com descontons é de R$ 80,00.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-12">
                     <div class="col-md-6">
@@ -90,6 +101,56 @@
             </div>
 
         </form>
+    </div>
+
+    <div class="container">
+        <div th:if="${#lists.isEmpty(productComponents)}">
+            <div class="text-center alert alert-warning">
+                <span th:text="#{module.client.model.noComponentsForProduct.message}"></span>
+            </div>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(productComponents)}">
+            <table class="table table-hover">
+                <thead>
+                <tr class="grid-title">
+                    <th scope="col">Id</th>
+                    <th scope="col"><span th:text="#{module.general.name.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.type.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.product.price.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.product.description.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.active.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.edit.label}"></span></th>
+                    <th scope="col"><span th:text="#{module.general.delete.label}"></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="productComponent : ${productComponents}">
+                    <td th:text="${productComponent.id}"></td>
+                    <td th:text="${productComponent.component.name}"></td>
+                    <td th:text="#{${productComponent.component.productType.phrase}}"></td>
+                    <td class="moneyFormat" th:text="${productComponent.price}"></td>
+                    <td th:text="${productComponent.component.description}"></td>
+                    <td th:if="${productComponent.component.active}">
+                        <span th:text="#{module.general.yes.label}"></span>
+                    </td>
+                    <td th:if="not ${productComponent.component.active}">
+                        <span th:text="#{module.general.no.label}"></span>
+                    </td>
+                    <td>
+                        <a th:href="${'/product/component/add/' + productComponent.id}" class="btn btn-default">
+                            <span th:text="#{module.general.edit.label}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="${'/product/component/delete/' + productComponent.id}" class="btn btn-default">
+                            <span th:text="#{module.general.delete.label}"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div th:replace="layout/footer :: footer-scripts"></div>

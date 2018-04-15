@@ -38,7 +38,7 @@
                             <option value=""><span th:text="#{module.general.selectValue.label}"></span></option>
                             <option th:each="product : ${products}"
                                     th:value="${product.id}"
-                                    th:text="${product.name}"
+                                    th:text="${product.name} + ' - ' + #{${product.productType.phrase}}"
                                     th:attr="data-item=${product.price}"
                             >
                             </option>
@@ -63,7 +63,7 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label class="control-label"><span th:text="#{module.product.price.label}"></span></label>
-                        <input type="text" class="form-control money" th:field="*{price}" required="required"/>
+                        <input type="text" class="form-control money" th:field="*{price}" readonly="readonly" />
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
             $("#originalPrice").val(originalPrice);
             $("#quantity").val(1);
             $("#discount").val(0);
-            $("#price").val(originalPrice);
+            $("#price").val(round(originalPrice, 2));
         });
 
         $("#quantity").on('blur', function() {
@@ -104,6 +104,7 @@
             var discount = parseFloat($("#discount").val());
 
             var newPrice = (quantity * (1 - (discount / 100)) * originalPrice);
+            newPrice = round(newPrice, 2);
             $("#price").val(newPrice);
 
 
