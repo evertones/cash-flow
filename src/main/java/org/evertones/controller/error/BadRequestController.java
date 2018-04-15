@@ -13,7 +13,6 @@ public class BadRequestController {
 
     private static Logger logger = LoggerFactory.getLogger(BadRequestController.class);
 
-
     @RequestMapping(path = "/403", method = RequestMethod.GET)
     public String error403(Principal principal) {
         logger.info("User"  + principal.getName());

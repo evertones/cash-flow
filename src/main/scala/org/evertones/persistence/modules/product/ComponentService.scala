@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class ComponentService {
 
-    private[product] var componentRepository: ComponentRepository = null
+    private[product] var componentRepository: ComponentRepository = _
 
     @Autowired
     def setComponentRepository(componentRepository: ComponentRepository): Unit = {

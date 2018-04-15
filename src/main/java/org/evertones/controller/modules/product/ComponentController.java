@@ -80,8 +80,9 @@ public class ComponentController extends BaseController {
         component.setProduct(productRepository.findOne(component.getProduct().getId()));
         componentService.save(component);
 
-        // TODO: 1) Get the default locale; 2) add values for CSS classes in an Enum
-        attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, DEFAULT_LOCALE));
+        // TODO: add values for CSS classes in an Enum
+        attributes.addFlashAttribute("flashMessage",
+                messageSource.getMessage("module.general.saveSuccess.message", null, DEFAULT_LOCALE));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
         return String.format("redirect:add/%s", component.getProduct().getId().toString());

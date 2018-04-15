@@ -50,18 +50,14 @@ public class ProductController extends BaseController {
 
         return "product/edit";
     }
-    /*
-    Client client = clientRepository.findOne(id);
-        model.addAttribute("clientModels", client.getModels());
-        model.addAttribute("client", client);
-    */
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String submit(Product product, RedirectAttributes attributes) {
         productService.save(product);
 
-        // TODO: 1) Get the default locale; 2) add values for CSS classes in an Enum
-        attributes.addFlashAttribute("flashMessage", messageSource.getMessage("module.general.saveSuccess.message", null, DEFAULT_LOCALE));
+        // TODO: add values for CSS classes in an Enum
+        attributes.addFlashAttribute("flashMessage",
+                messageSource.getMessage("module.general.saveSuccess.message", null, DEFAULT_LOCALE));
         attributes.addFlashAttribute("cssClass", "alert alert-success");
 
         return String.format("redirect:add/%s", product.getId().toString());

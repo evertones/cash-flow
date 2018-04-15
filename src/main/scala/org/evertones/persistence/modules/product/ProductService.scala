@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class ProductService {
 
-    private[product] var productRepository: ProductRepository = null
+    private[product] var productRepository: ProductRepository = _
 
     @Autowired
     def setProductRepository(productRepository: ProductRepository): Unit = {
