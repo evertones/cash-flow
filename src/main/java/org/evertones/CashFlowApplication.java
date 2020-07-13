@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
@@ -23,9 +24,16 @@ public class CashFlowApplication implements CommandLineRunner {
 
     private Bootstrap bootstrap;
 
+    private Environment env;
+
     @Autowired
     public void setBootstrap(Bootstrap bootstrap) {
         this.bootstrap = bootstrap;
+    }
+
+    @Autowired
+    public void setEnv(Environment env) {
+        this.env = env;
     }
 
 	public static void main(String[] args) {
@@ -59,7 +67,8 @@ public class CashFlowApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-        String profile = System.getenv("spring.profiles.active");
+        //String profile = System.getenv("spring.profiles.active");
+        String profile = env.getProperty("spring.profiles.active");
         logger.info(String.format("Profile: {%s}", profile));
         if (profile != null && profile.equalsIgnoreCase("dev")) {
             logger.info("Running bootstrap process to start up the fixture data");
